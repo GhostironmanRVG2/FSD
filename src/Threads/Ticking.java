@@ -1,4 +1,4 @@
-package Threads_Server;
+package Threads;
 
 public class Ticking {
     

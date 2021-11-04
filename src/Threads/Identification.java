@@ -1,10 +1,10 @@
-package Threads_Server;
-
+package Threads;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import Hash.PasswordUtils;
 
 public class Identification {
   Socket ligacao;
@@ -27,9 +27,14 @@ public class Identification {
    System.out.println("User Connected");
    //RECEBER PEDIDO
    String pedido=in.readLine();
-   System.out.println(pedido);
+   //TRANSFORMAR NUMA HASH OS DADOS
+   PasswordUtils p=new PasswordUtils();
+   //GERAR CARACTERES PARA O HASH
+   String salt=p.getSalt(10);
+   //GERAR O ENCRYPT
+   String resposta=p.generateSecurePassword(pedido, salt);
    //RESPONDER
-   out.print("ALO");
+   out.print(resposta);
    //PREENCHER A BOX DA MSG
    out.flush();
    //FECHAR O BUFFER
