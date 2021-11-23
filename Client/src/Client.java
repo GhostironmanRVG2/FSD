@@ -11,14 +11,16 @@ public class Client {
      
    public static void main(String[] args) throws IOException {
        //INFORMAR AO UTILIZADOR QUE INPUT QUEREMOS DA PARTE DELE E GUARDAR
-       System.out.println("Please write your name and press enter: ");
+       System.out.println("Please write your name and press enter: \n");
        Scanner scan=new Scanner(System.in);
        String nome=scan.nextLine();
+       System.out.println("Please Write down your card IDENTIFICATION number: \n");
+       String bi=scan.nextLine();
        //Extrair IP DATA e passar para uma String e juntar ao nome
        InetAddress ipi=InetAddress.getLocalHost();
        String ip= ipi.toString();
        //Juntar nome+ip
-       String msg="["+nome+"/"+ip+"]";
+       String msg="["+nome+"/"+ip+"/"+bi+"]";
        
        //IP A QUE NOS VAMOS CONECT
        InetAddress serveAddress=InetAddress.getByName("localhost");
