@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import Lists.*;
 public class Ticking {
+    Hash h=new Hash();
     Socket ligacao;
     BufferedReader in;
     PrintWriter out;
@@ -28,8 +29,7 @@ public class Ticking {
     String pedido=in.readLine();
     //VERIFICAR TIPO DE PEDIDO , CASO SEJA DE TIPO IDENTIFICACAO , GUARDAR HASH NO VECTOR CASO CONTRARIO APENAS RESPONDER POIS É DE TIPO CLIENTE
     if(tipoDePedido.equals("I")){
-         
-      Hash h=new Hash();
+      
       h.addHash(pedido);
       
     }else if(tipoDePedido.equals("C")){
@@ -37,6 +37,7 @@ public class Ticking {
     
     //RESPONDER
     out.print("alo");
+    out.print("k");
     //PREENCHER A BOX DA MSG
     out.flush();
     //FECHAR O BUFFER
@@ -47,11 +48,10 @@ public class Ticking {
     }
     
    
-   
+    
     //FECHAR A LIGACAO
     ligacao.close();
- 
- 
+   
     }
  
 

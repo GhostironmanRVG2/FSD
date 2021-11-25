@@ -22,6 +22,11 @@ public class Identification {
 
    }
 
+
+
+
+
+
    public void run() throws IOException{
 
    System.out.println("User Connected");
@@ -33,6 +38,27 @@ public class Identification {
    String salt=p.getSalt(10);
    //GERAR O ENCRYPT
    String resposta=p.generateSecurePassword(pedido, salt);
+   
+   //FAZER LIGACAO AO SERVER DE TICKING E ENVIAR A HASH
+   //LIGACAO
+   Socket l=new Socket("localhost",25563); 
+   //BUFFER READER
+   BufferedReader entrada=new BufferedReader(new InputStreamReader(l.getInputStream()));
+   //PrintWriter
+   PrintWriter saida=new PrintWriter(l.getOutputStream(),true);
+   //TIPO DE SERVICO
+   String tipo_servico = "I";
+   //PRINT DO TIPO DE SERVICO
+   saida.println(tipo_servico);
+   //ENVIAR HASH
+   saida.println(resposta);
+   //ENCHER O BUFFER
+   saida.flush();
+   //FECHAR A LIGACAO COM O ST
+   l.close();
+
+
+
    //RESPONDER
    out.print(resposta);
    //PREENCHER A BOX DA MSG
@@ -46,6 +72,9 @@ public class Identification {
 
 
    }
+
+
+
 
 
 

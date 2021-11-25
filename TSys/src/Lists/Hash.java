@@ -18,5 +18,9 @@ public boolean existHash(String hash){
     }
 }
 
+public Vector getVec(){
+    return HashVec;
+}
+
 
 }
