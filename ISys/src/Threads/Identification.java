@@ -61,6 +61,10 @@ public class Identification {
 
    //RESPONDER
    out.print(resposta);
+   //RESPOSTA DO IP
+   out.print("localhost");
+   //RESPOSTA DA PORTA
+   out.print("25563");
    //PREENCHER A BOX DA MSG
    out.flush();
    //FECHAR O BUFFER

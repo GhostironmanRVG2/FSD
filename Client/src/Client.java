@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -39,7 +38,11 @@ public class Client {
        out.flush();
        //LER A RESPOSTA DO SERVIDOR
        String resposta= in.readLine();
-       System.out.println("Resposta do servidor: "+resposta);
+       //LER O IP DO SI
+        String ip_si = in.readLine();
+       //LER A PORTA DO SI
+        String porta_si = in.readLine();
+       System.out.println("Resposta do servidor: "+resposta + " Ip do servidor: " + ip_si + " Porta do servidor: " + porta_si);
        //FECHAR LIGACAO
        ligacao.close();
        

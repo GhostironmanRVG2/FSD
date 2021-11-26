@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import Lists.*;
 public class Ticking {
-    Hash h=new Hash();
+    Hash h = new Hash();
     Socket ligacao;
     BufferedReader in;
     PrintWriter out;
