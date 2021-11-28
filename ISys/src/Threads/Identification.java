@@ -57,15 +57,13 @@ public class Identification {
    //FECHAR A LIGACAO COM O ST
    l.close();
 
-
-
-   //RESPONDER
-   out.print(resposta);
-   //RESPOSTA DO IP
-   out.print("localhost");
-   //RESPOSTA DA PORTA
-   out.print("25563");
-   //PREENCHER A BOX DA MSG
+   //RECEBER A HASH
+   out.println(resposta);
+   //ENVIAR IP
+   out.println("localhost");
+   //ENVIAR porta
+   out.println("25563");
+   //ENCHER O BUFFER
    out.flush();
    //FECHAR O BUFFER
    in.close();
