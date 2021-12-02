@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.Iterator;
+import java.time.LocalDateTime;
+
+import javax.sound.sampled.SourceDataLine;
 
 import Lists.*;
 public class Ticking {
@@ -59,7 +61,9 @@ public class Ticking {
     
       //OPCAO 1 DO CLIENTE EM QUE SO É PESSIVEL EFETUAR CASO A HASH CONTINUE A SER PARTE DO SISTEMA(LISTA DE SERVICOS)
     }else if(etapa.equals("1")&&h.existHash(hash)){
-    
+      
+
+
       System.out.println("Lista");
       //ITERAR O NOSSO VETOR DE SERVICOS
       //UM TRY E UM CATCH CASO NAO HAJA SERVICOS
@@ -71,6 +75,8 @@ public class Ticking {
       }
        }catch(Exception e){
       //INFORMAR QUE NAO HA MAIS SERVICOS QUANDO DER OUT OF RANGE EM CASO DE NAO HAVER SERVICOS
+      //CRIAR TIMESTAMP PARA O CLIENTE ???
+      out.println("##### TimeStamp: " + java.time.Clock.systemUTC().instant() + " ######");
       out.println("#####No more services available#####");
       }
 
