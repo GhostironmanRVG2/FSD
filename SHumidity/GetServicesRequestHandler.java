@@ -24,7 +24,8 @@ public class GetServicesRequestHandler extends Thread {
 		}
 	}
 	
-	public void run() {                
+	public void run() {     
+		System.out.println("User Connected");           
 		try {
 			String response;
 			String msg = in.readLine();

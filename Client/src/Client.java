@@ -122,6 +122,7 @@ public class Client {
           String timestamp = scan.nextLine();
           Instant timestamp_servico = Instant.parse(timestamp);
           ServiceSocket S = new ServiceSocket(ip_tipo_servico, porta_ip_servico, timestamp_servico);
+          S.go();
           
        }
        

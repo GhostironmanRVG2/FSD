@@ -33,12 +33,14 @@ public class ServiceSocket {
         //PrintWriter
         PrintWriter out=new PrintWriter(ligacao.getOutputStream(),true);
         //MENSAGEM 
-        out.println(Timestamp);
+        out.println("getHumidity "+Timestamp.toString());
         //ENCHER BUFFER
         out.flush();
         //RESPOSTA
         String resposta = in.readLine();
+        String respostadois = in.readLine();
         System.out.println(resposta);
+        System.out.println(respostadois);
         
         //FECHAR O IN
         in.close();

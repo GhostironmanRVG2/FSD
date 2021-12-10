@@ -22,7 +22,6 @@ public class ServiceHumidityServer {
 			try {
 				
 				Socket ligacao = servidor.accept();
-				
 				GetServicesRequestHandler t = new GetServicesRequestHandler(ligacao, source);
 				t.start();
 				
