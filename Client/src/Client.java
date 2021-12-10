@@ -4,6 +4,8 @@ import java.time.Instant;
 import java.util.Scanner;
 import rmi_inter.*;
 import ops.*;
+import java.rmi.registry.LocateRegistry;
+
 
 public class Client {
    
@@ -106,10 +108,24 @@ public class Client {
        //RECEBER O TIPO DE SERVICO
        String tipo_servico=scan.nextLine(); 
        if (tipo_servico.equals("rmi")) {
-          //PEDIR PARA INTRODUZIR O IP
+          //NOME DO SERVICO
+          String SERVICE_NAME="/TemperatureService"; 
+         //PEDIR PARA INTRODUZIR O IP
           System.out.println("Introduza o IP:");
           String ip_tipo_servico = scan.nextLine();
-       } else {
+          //PEDIR O TIMESTAMP
+          System.out.println("Introduza o timestamp:");
+          String ts_rmi = scan.nextLine();
+          Instant ts_rmi_servico = Instant.parse(ts_rmi);
+          //CRIAR UM REGISTO
+          ServicesInterface si = (ServicesInterface) LocateRegisty.getRegistry(ip_tipo_servico).lookout(SERVICE_NAME);
+          float response = si.getTemp(ts_rmi_servico);
+          //RESPOSTA
+          System.out.println(response);
+
+
+
+       } else if (tipo_servico.equals("socket")){
           //PEDIR PARA INTRODUZIR O IP
           System.out.println("Introduza o IP:");
           String ip_tipo_servico = scan.nextLine();
@@ -124,6 +140,8 @@ public class Client {
           ServiceSocket S = new ServiceSocket(ip_tipo_servico, porta_ip_servico, timestamp_servico);
           S.go();
           
+       } else {
+          System.out.println("404 ERROR -- TIPO DE SERVIÇO NÃO ENCONTRADO!");
        }
        
        break;
