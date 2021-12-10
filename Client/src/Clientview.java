@@ -14,6 +14,11 @@ public class Clientview {
    Login l=new Login();
    l.construir();
 
+   TipoOperacao tip=new TipoOperacao();
+   tip.construir();
+   
+   CriarServicos c=new CriarServicos();
+   c.construir();
  }
 
 
