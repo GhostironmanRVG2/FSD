@@ -2,14 +2,16 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.time.Instant;
 import java.util.Scanner;
-import rmi_inter.*;
 import ops.*;
+import java.rmi.AccessException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
 
 public class Client {
    
-   public static void main(String[] args) throws IOException{
+   public static void main(String[] args) throws IOException,AccessException, RemoteException, NotBoundException{
      //CRIAR O SCANNER  
      Scanner scan=new Scanner(System.in);
      //OFERECER AS OPCOES AO CLIENTE
@@ -117,11 +119,11 @@ public class Client {
           System.out.println("Introduza o timestamp:");
           String ts_rmi = scan.nextLine();
           Instant ts_rmi_servico = Instant.parse(ts_rmi);
-          //CRIAR UM REGISTO
-          ServicesInterface si = (ServicesInterface) LocateRegisty.getRegistry(ip_tipo_servico).lookout(SERVICE_NAME);
-          float response = si.getTemp(ts_rmi_servico);
+          
+         ServicesInterface si= (ServicesInterface) LocateRegistry.getRegistry("localhost").lookup(SERVICE_NAME);
           //RESPOSTA
-          System.out.println(response);
+          float resposta=si.getTemp(ts_rmi_servico);
+          System.out.println(resposta);
 
 
 

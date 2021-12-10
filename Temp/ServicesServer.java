@@ -7,12 +7,7 @@ public class ServicesServer {
 	String SERVICE_NAME="/TemperatureService";
 
 	private void bindRMI(Sources sources) throws RemoteException {
-
-		System.getProperties().put( "java.security.policy", "./server.policy");
-
-		if( System.getSecurityManager() == null) {
-			System.setSecurityManager(new SecurityManager());
-		}
+        
 
 		try { 
 			LocateRegistry.createRegistry(1099);
