@@ -110,8 +110,6 @@ public class Client {
        //RECEBER O TIPO DE SERVICO
        String tipo_servico=scan.nextLine(); 
        if (tipo_servico.equals("rmi")) {
-          //NOME DO SERVICO
-          String SERVICE_NAME="/TemperatureService"; 
          //PEDIR PARA INTRODUZIR O IP
           System.out.println("Introduza o IP:");
           String ip_tipo_servico = scan.nextLine();
@@ -119,12 +117,10 @@ public class Client {
           System.out.println("Introduza o timestamp:");
           String ts_rmi = scan.nextLine();
           Instant ts_rmi_servico = Instant.parse(ts_rmi);
-          
-         ServicesInterface si= (ServicesInterface) LocateRegistry.getRegistry("localhost").lookup(SERVICE_NAME);
-          //RESPOSTA
-          float resposta=si.getTemp(ts_rmi_servico);
+          //INVOCAR OBJETO
+          ServicesInterface si=(ServicesInterface)LocateRegistry.getRegistry("localhost").lookup("/TemperatureService");
+          float resposta= si.getTemp(ts_rmi_servico);
           System.out.println(resposta);
-
 
 
        } else if (tipo_servico.equals("socket")){
