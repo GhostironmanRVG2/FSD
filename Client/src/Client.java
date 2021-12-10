@@ -1,11 +1,10 @@
 import java.io.IOException;
 import java.net.InetAddress;
+import java.time.Instant;
 import java.util.Scanner;
-import java.util.concurrent.ExecutionException;
-
-import javax.lang.model.util.ElementScanner14;
-
+import rmi_inter.*;
 import ops.*;
+
 public class Client {
    
    public static void main(String[] args) throws IOException{
@@ -78,7 +77,7 @@ public class Client {
             //RECEBER DESIGNACAO
             String designacao_servico=scan.nextLine();
             //PEDIR PARA INTRODUZIR O IP
-            System.out.println("INTRODUZA O IP:");
+            System.out.println("Introduza o IP:");
             //RECEBER O IP
             String ip_servico=scan.nextLine();
             //OBJETO QUE EXECUTA OS METODOS
@@ -101,7 +100,31 @@ public class Client {
        
 
        break;
-       case 3:
+       case 3: 
+       //PERGUNTAR AO CLIENTE TIPO DE SERVICO A QUE SE QUER CONECTAR
+       System.out.println("ESCREVA O TIPO DE SERVICO:");
+       //RECEBER O TIPO DE SERVICO
+       String tipo_servico=scan.nextLine(); 
+       if (tipo_servico.equals("rmi")) {
+          //PEDIR PARA INTRODUZIR O IP
+          System.out.println("Introduza o IP:");
+          String ip_tipo_servico = scan.nextLine();
+       } else {
+          //PEDIR PARA INTRODUZIR O IP
+          System.out.println("Introduza o IP:");
+          String ip_tipo_servico = scan.nextLine();
+          //PEDIR PORTA
+          System.out.println("Introduza a porta:");
+          String portastr_servico = scan.nextLine();
+          int porta_ip_servico = Integer.valueOf(portastr_servico);
+          //PEDIR TIMESATAMP
+          System.out.println("Introduz o Timestamp:");
+          String timestamp = scan.nextLine();
+          Instant timestamp_servico = Instant.parse(timestamp);
+          ServiceSocket S = new ServiceSocket(ip_tipo_servico, porta_ip_servico, timestamp_servico);
+          
+       }
+       
        break;
        default:
        System.out.println("Erro , voce nao selecionou nenhuma das opcoes dadas.");
