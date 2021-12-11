@@ -25,6 +25,12 @@ public class Clientview {
    
    CriarServicos c=new CriarServicos();
    c.construir();
+
+   Servico s = new Servico();
+   s.construir();
+
+   SisIdenti si = new SisIdenti();
+   si.construir();
  }
 
 

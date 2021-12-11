@@ -20,6 +20,9 @@ public class Servico{
         //BACKGROUND COLOR
         janela.setBackground(Color.lightGray);
 
+        //COLOR
+        Color lil = new Color(173,216,230);
+
         //CRIAR PANEL
         JPanel panel=new JPanel();
         //TAMANHO DO PAINEL
@@ -78,7 +81,7 @@ public class Servico{
         //BOTAO
         JButton b=new JButton("CONFIRMAR");
         b.setBounds(165, 265, 140, 40);
-        b.setBackground(Color.GRAY);
+        b.setBackground(lil);
 
         //LABEL HASH
         JLabel j_resp=new JLabel("RESPOSTA DO SERVIDOR:");
