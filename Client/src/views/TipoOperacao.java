@@ -18,6 +18,12 @@ public void construir(){
     JFrame janela=new JFrame();
     //TAMANHO DA JANELA
     janela.setBounds(300,0,500,250);
+    //COLOR
+    Color lil = new Color(173,216,230);
+      //LOAD ICON
+      Image icon = Toolkit.getDefaultToolkit().getImage("C:/Users/pedro/Desktop/universidade/3 ano/Projects/fsd projects/FSD_Project/Client/src/views/assets/icon.PNG");
+      //SET IT
+      janela.setIconImage(icon); 
     //BACKGROUND COLOR
     janela.setBackground(Color.lightGray);
     //CRIAR PANEL
@@ -39,7 +45,7 @@ public void construir(){
     //DEF DE TEXTO
     op.setFont(new Font("Italic",Font.BOLD,12));
     //POSICAO E TAMANHO DO TEXTO
-    op.setBounds(130,70,130,12);
+    op.setBounds(140,70,130,12);
     //Buffer
     String ops[]={"Consultar","Criar"}; 
     //COMBO BOX
@@ -49,7 +55,7 @@ public void construir(){
     //BOTAO
     JButton b=new JButton("CONFIRMAR");
     b.setBounds(165, 120, 140, 40);
-    b.setBackground(Color.GRAY);
+    b.setBackground(lil);
 
     //ADICIONAR LABEL AO PANEL
     panel.add(Titulo);

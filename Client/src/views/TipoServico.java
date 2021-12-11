@@ -14,10 +14,13 @@ public TipoServico(){}
 public void construir(){
     //Inicializar janela principal  
     JFrame janela=new JFrame();
+      //LOAD ICON
+      Image icon = Toolkit.getDefaultToolkit().getImage("C:/Users/pedro/Desktop/universidade/3 ano/Projects/fsd projects/FSD_Project/Client/src/views/assets/icon.PNG");
+      //SET IT
+      janela.setIconImage(icon);
+      Color lil = new Color(173,216,230);
     //TAMANHO DA JANELA
     janela.setBounds(300,0,500,250);
-    //BACKGROUND COLOR
-    janela.setBackground(Color.lightGray);
     //CRIAR PANEL
     JPanel panel=new JPanel();
     //TAMANHO DO PAINEL
@@ -47,7 +50,7 @@ public void construir(){
     //BOTAO
     JButton b=new JButton("CONFIRMAR");
     b.setBounds(165, 120, 140, 40);
-    b.setBackground(Color.GRAY);
+    b.setBackground(lil);
 
     //ADICIONAR LABEL AO PANEL
     panel.add(Titulo);

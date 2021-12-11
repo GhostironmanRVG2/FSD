@@ -13,8 +13,14 @@ public class Login {
     public void construir(){
     //criacao de janela
     JFrame janela=new JFrame();
+      //LOAD ICON
+      Image icon = Toolkit.getDefaultToolkit().getImage("C:/Users/pedro/Desktop/universidade/3 ano/Projects/fsd projects/FSD_Project/Client/src/views/assets/icon.PNG");
+      //SET IT
+      janela.setIconImage(icon); 
     //TAMANHO DA JANELA
     janela.setBounds(300,0,500,400);
+    //COLOR
+    Color lil = new Color(173,216,230);
     //BACKGROUND COLOR
     janela.setBackground(Color.lightGray);
     //CRIAR PANEL
@@ -75,7 +81,7 @@ public class Login {
     //BOTAO
     JButton b=new JButton("CONFIRMAR");
     b.setBounds(165, 280, 140, 40);
-    b.setBackground(Color.GRAY);
+    b.setBackground(lil);
      
 
     //ADICIONAR LABEL AO PANEL
