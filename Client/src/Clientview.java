@@ -20,6 +20,11 @@ public class Clientview {
    Servico sc = new Servico();
    sc.construir();
 
+   TipoOperacao tip=new TipoOperacao();
+   tip.construir();
+   
+   CriarServicos c=new CriarServicos();
+   c.construir();
  }
 
 
