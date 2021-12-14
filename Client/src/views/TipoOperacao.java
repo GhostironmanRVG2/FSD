@@ -60,6 +60,8 @@ public void construir(){
     op.setBounds(140,70,130,12);
     //TAMANHO DO COMBO BOX
     cb.setBounds(250,67,90,20);
+    //COLOR
+    cb.setBackground(lil);
     //BOTAO
     JButton b=new JButton("CONFIRMAR");
     b.setBounds(165, 120, 140, 40);

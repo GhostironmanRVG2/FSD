@@ -57,6 +57,8 @@ public void construir(){
     op.setBounds(130,70,130,12);
     //Tamanho
     cb.setBounds(250,67,90,20);
+    //COLOR
+    cb.setBackground(lil);
     //BOTAO
     b.setBounds(165, 120, 140, 40);
     //LER O BOTAO
