@@ -1,18 +1,29 @@
 package views;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.*;
-public class CriarServicos {
+public class CriarServicos implements ActionListener{
 
-    public CriarServicos(){}
+    //TEXT FIELD
+    JTextField textfieldservice=new JTextField();
+    //TEXT FIELD
+    JTextField textfieldip=new JTextField();
 
-    
     public void construir(){
         //criacao de janela
         JFrame janela=new JFrame();
+        //COLOCAR NO CENTRO DA TELA
+        janela.setLocationRelativeTo(null);
+        //DESATIVAR O BOTÃO DE AUMENTAR A JANELA
+        janela.setResizable(false);
+        //FECHAR O PROGRAMA NO BOTÃO 'X'
+        janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //LOAD ICON
         Image icon = Toolkit.getDefaultToolkit().getImage("C:/Users/pedro/Desktop/universidade/3 ano/Projects/fsd projects/FSD_Project/Client/src/views/assets/icon.PNG");
         //COLOR
@@ -46,9 +57,7 @@ public class CriarServicos {
         labelservice.setFont(new Font("Italic",Font.BOLD,12));
         //POSICAO E TAMANHO
         labelservice.setBounds(175,70,130,12);
-        //TEXT FIELD
-        JTextField textfieldservice=new JTextField();
-        //TAMANHO
+        //TAMANHO DO TEXT FIELD DO SEVIÇO
         textfieldservice.setBounds(130,85,210,30);
     
     
@@ -59,9 +68,7 @@ public class CriarServicos {
          labelip.setFont(new Font("Italic",Font.BOLD,12));
          //POSICAO E TAMANHO
          labelip.setBounds(150,140,200,12);
-         //TEXT FIELD
-         JTextField textfieldip=new JTextField();
-         //TAMANHO
+         //TAMANHO DO TEXT FIELD DO IP
          textfieldip.setBounds(130,155,210,30);
     
     
@@ -70,6 +77,8 @@ public class CriarServicos {
         JButton b=new JButton("CONFIRMAR");
         b.setBounds(165, 220, 140, 40);
         b.setBackground(lil);
+        //LER O BOTÃO
+        b.addActionListener(this);
          
     
         //ADICIONAR LABEL AO PANEL
@@ -90,6 +99,21 @@ public class CriarServicos {
         }
 
 
-
+        @Override
+        //FUNÇÃO PARA CRIAR UM SERVIÇO, VERIFICANDO SE OS ESPAÇOS ESTÃO PREENCHIDOS
+        public void actionPerformed(ActionEvent e) {
+            if(textfieldip.getText().length() > 0 && textfieldservice.getText().length() > 0){
+                System.out.println("funciona");
+            } else {
+                JOptionPane.showMessageDialog(null, "Os campos tem de ser todos preenchidos!");
+            }
+            
+        }
     
+        //FUNÇÃO PARA CORRER O PROGRAMA
+        public CriarServicos(){
+            construir();
+        }
+
+
 }

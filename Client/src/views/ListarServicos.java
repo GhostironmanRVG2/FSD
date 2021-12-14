@@ -1,4 +1,6 @@
 package views;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -7,11 +9,22 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.*;
 
-public class ListarServicos {
+public class ListarServicos implements ActionListener{
+
+    //Inicializar janela principal  
+    JFrame janela=new JFrame();
+    //COMBOBOX TIPO DE CONEXAO
+    String s1[] = {"HUMIDADE", "TEMPERATURA"};
+    JComboBox c_tipo=new JComboBox(s1);
+
     //METODO QUE VAI CONSTRUIR A NOSSA JANELA
     public void construir(){
-        //Inicializar janela principal  
-        JFrame janela=new JFrame();
+        //COLOCAR NO CENTRO DA TELA
+        janela.setLocationRelativeTo(null);
+        //DESATIVAR O BOTÃO DE AUMENTAR A JANELA
+        janela.setResizable(false);
+        //FECHAR O PROGRAMA NO BOTÃO 'X'
+        janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //TAMANHO DA JANELA
         janela.setBounds(300,0,500,480);
         //COLOCAR NO CENTRO DA TELA
@@ -51,9 +64,7 @@ public class ListarServicos {
         //POSICAO E TAMANHO DO TEXTO
         j_tipo.setBounds(180,80,200,12);
 
-        //COMBOBOX TIPO DE CONEXAO
-        String s1[] = {"HUMIDADE", "TEMPERATURA"};
-        JComboBox c_tipo=new JComboBox(s1);
+        //TAMANH0 DO COMBOBOX
         c_tipo.setBounds(130, 95, 210, 30);
 
         //LABEL HASH
@@ -72,6 +83,8 @@ public class ListarServicos {
         JButton b=new JButton("CONFIRMAR");
         b.setBounds(165, 360, 140, 40);
         b.setBackground(lil);
+        //LER O BOTÃO
+        b.addActionListener(this);
 
         //ADICIONAR LABEL AO PANEL
         panel.add(Titulo);
@@ -89,8 +102,17 @@ public class ListarServicos {
 
     }
 
+
+
+    @Override
+    //FUNÇÃO PARA GUARDAR A OPÇÃO SELECIONADA NA COMBOBOX
+    public void actionPerformed(ActionEvent e) {
+        String tipo = c_tipo.getSelectedItem().toString();
+        
+    }
+
+    //FUNÇÃO PARA EXECUTAR O PROGRAMA
     public ListarServicos(){
         construir();
     }
-
 }

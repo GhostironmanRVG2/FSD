@@ -131,6 +131,7 @@ public class SisIdenti implements ActionListener{
     }
 
     @Override
+    //FUNÇÃO PARA VERIFICAR SE OS CAMPOS ESTÃO TODOS PREENCHIDOS
     public void actionPerformed(ActionEvent e) {
         if(t_user.getText().length() > 0 && t_cc.getText().length() > 0 && t_ip.getText().length() > 0){
             System.out.printf("A FUNCIONAR");

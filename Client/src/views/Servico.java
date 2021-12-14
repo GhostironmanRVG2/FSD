@@ -1,15 +1,27 @@
 package views;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class Servico{
+public class Servico implements ActionListener{
+
+        //TEXT FIELD USER
+        JTextField t_ip=new JTextField();
+        //TEXT FIELD CC
+        JTextField t_ts=new JTextField();
+        //COMBOBOX TIPO DE CONEXAO
+        String s1[] = { "SOCKET", "RMI"};
+        JComboBox c_tipo=new JComboBox(s1);
+
     //METODO QUE VAI CONSTRUIR A NOSSA JANELA
     public void construir(){
         //Inicializar janela principal  
@@ -53,9 +65,7 @@ public class Servico{
         //POSICAO E TAMANHO DO TEXTO
         j_ip.setBounds(130,70,200,12);
 
-        //TEXT FIELD USER
-        JTextField t_ip=new JTextField();
-        //TAMANHO
+        //TAMANHO DO TEXT FIELD DO IP
         t_ip.setBounds(130,85,210,30);
 
         //LABEL CC 
@@ -65,9 +75,7 @@ public class Servico{
         //POSICAO E TAMANHO DO TEXTO
         j_ts.setBounds(130,135,200,12);
                 
-        //TEXT FIELD CC
-        JTextField t_ts=new JTextField();
-        //TAMANHO
+        //TAMANHO DO CC
         t_ts.setBounds(130,150,210,30);
 
         //LABEL CC 
@@ -77,9 +85,7 @@ public class Servico{
         //POSICAO E TAMANHO DO TEXTO
         j_tipo.setBounds(130,200,200,12);
 
-        //COMBOBOX TIPO DE CONEXAO
-        String s1[] = { "SOCKET", "RMI"};
-        JComboBox c_tipo=new JComboBox(s1);
+        //TAMANHO DO COMBOBOX
         c_tipo.setBounds(130, 215, 210, 30);
 
 
@@ -87,6 +93,8 @@ public class Servico{
         JButton b=new JButton("CONFIRMAR");
         b.setBounds(165, 265, 140, 40);
         b.setBackground(lil);
+        //LER O BOTAO
+        b.addActionListener(this);
 
         //LABEL HASH
         JLabel j_resp=new JLabel("RESPOSTA DO SERVIDOR:");
@@ -121,10 +129,24 @@ public class Servico{
     }
 
 
-    
+    @Override
+    //FUNÇÃO PARA VERIFICAR SE OS CAMPOS ESTÃO TODOS PREENCHIDOS
+    public void actionPerformed(ActionEvent e) {
+        if (t_ip.getText().length() > 0 && t_ts.getText().length() > 0){
+            String tipoconex = c_tipo.getSelectedItem().toString();
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Os campos tem de ser todos preenchidos!");
 
+        }
+        
+
+    }
+
+    //FUNÇÃO PARA CORRER O PROGRAMA
     public Servico(){
         construir();
     }
+
 
 }

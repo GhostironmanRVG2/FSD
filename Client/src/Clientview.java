@@ -8,7 +8,7 @@ public class Clientview {
  public static void main(String[] args) {
  //OBJETO ONDE SE VAI CONSTRUIR
    TipoServico t=new TipoServico();
-   ListarServicos l= new ListarServicos();
+   
  }
 
 

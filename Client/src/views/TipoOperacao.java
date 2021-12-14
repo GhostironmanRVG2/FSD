@@ -1,6 +1,9 @@
 package views;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -9,21 +12,30 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 
-public class TipoOperacao {
-    public TipoOperacao(){}
+public class TipoOperacao implements ActionListener{
+    //Inicializar janela principal  
+    JFrame janela=new JFrame();
+    //Buffer
+    String ops[]={"Consultar","Criar"}; 
+    //COMBO BOX
+    JComboBox cb=new JComboBox(ops);
 
     //METODO QUE VAI CONSTRUIR A NOSSA JANELA
 public void construir(){
-    //Inicializar janela principal  
-    JFrame janela=new JFrame();
     //TAMANHO DA JANELA
     janela.setBounds(300,0,500,250);
+    //COLOCAR NO CENTRO DA TELA
+    janela.setLocationRelativeTo(null);
+    //DESATIVAR O BOTÃO DE AUMENTAR A JANELA
+    janela.setResizable(false);
+    //FECHAR O PROGRAMA NO BOTÃO 'X'
+    janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     //COLOR
     Color lil = new Color(173,216,230);
-      //LOAD ICON
-      Image icon = Toolkit.getDefaultToolkit().getImage("C:/Users/pedro/Desktop/universidade/3 ano/Projects/fsd projects/FSD_Project/Client/src/views/assets/icon.PNG");
-      //SET IT
-      janela.setIconImage(icon); 
+    //LOAD ICON
+    Image icon = Toolkit.getDefaultToolkit().getImage("C:/Users/pedro/Desktop/universidade/3 ano/Projects/fsd projects/FSD_Project/Client/src/views/assets/icon.PNG");
+    //SET IT
+    janela.setIconImage(icon); 
     //BACKGROUND COLOR
     janela.setBackground(Color.lightGray);
     //CRIAR PANEL
@@ -46,16 +58,13 @@ public void construir(){
     op.setFont(new Font("Italic",Font.BOLD,12));
     //POSICAO E TAMANHO DO TEXTO
     op.setBounds(140,70,130,12);
-    //Buffer
-    String ops[]={"Consultar","Criar"}; 
-    //COMBO BOX
-    JComboBox cb=new JComboBox(ops);
-    //Tamanho
+    //TAMANHO DO COMBO BOX
     cb.setBounds(250,67,90,20);
     //BOTAO
     JButton b=new JButton("CONFIRMAR");
     b.setBounds(165, 120, 140, 40);
     b.setBackground(lil);
+    b.addActionListener(this);
 
     //ADICIONAR LABEL AO PANEL
     panel.add(Titulo);
@@ -69,4 +78,26 @@ public void construir(){
     janela.setLayout(null);
     janela.setVisible(true);
 }
+
+
+@Override
+//FUNÇÃO PARA SELECIONAR UMA DAS OPÇÕES PARA ABRIR A RESPETIVA JANELA
+public void actionPerformed(ActionEvent e) {
+    String selectCB = cb.getSelectedItem().toString();
+    String e1 = "Consultar";
+    String e2 = "Criar";
+    if(selectCB.equals(e1)){
+      janela.dispose();
+      ListarServicos ls = new ListarServicos();
+    }else if (selectCB.equals(e2)){
+      janela.dispose();
+      CriarServicos cs = new CriarServicos();
+    }
+}
+
+//FUNÇÃO PARA EXECUTAR O PROGRAMA
+public TipoOperacao(){
+  construir();
+}
+
 }

@@ -1,17 +1,29 @@
 package views;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class Login {
+public class Login implements ActionListener{
+
+  //TEXT FIELD
+  JTextField textfieldip=new JTextField();
+  //TEXT FIELD
+  JTextField textfieldporta=new JTextField();
+  //TEXT FIELD
+  JTextField textfieldHASH=new JTextField();
+  //criacao de janela
+  JFrame janela=new JFrame();
+
 
   public void construir(){
-    //criacao de janela
-    JFrame janela=new JFrame();
+
       //LOAD ICON
       Image icon = Toolkit.getDefaultToolkit().getImage("C:/Users/pedro/Desktop/universidade/3 ano/Projects/fsd projects/FSD_Project/Client/src/views/assets/icon.PNG");
       //SET IT
@@ -51,9 +63,7 @@ public class Login {
     labelip.setFont(new Font("Italic",Font.BOLD,12));
     //POSICAO E TAMANHO
     labelip.setBounds(185,70,130,12);
-    //TEXT FIELD
-    JTextField textfieldip=new JTextField();
-    //TAMANHO
+    //TAMANHO DO TEXT FIELD DO IP
     textfieldip.setBounds(130,85,210,30);
 
 
@@ -64,9 +74,7 @@ public class Login {
      labelporta.setFont(new Font("Italic",Font.BOLD,12));
      //POSICAO E TAMANHO
      labelporta.setBounds(170,140,135,12);
-     //TEXT FIELD
-     JTextField textfieldporta=new JTextField();
-     //TAMANHO
+     //TAMANHO DO TEXT FIELD DA PORTA
      textfieldporta.setBounds(130,155,210,30);
 
 
@@ -77,9 +85,7 @@ public class Login {
      labelHASH.setFont(new Font("Italic",Font.BOLD,12));
      //POSICAO E TAMANHO
      labelHASH.setBounds(175,210,135,12);
-     //TEXT FIELD
-     JTextField textfieldHASH=new JTextField();
-     //TAMANHO
+     //TAMANHO DO TEXT FIELD DA HASH
      textfieldHASH.setBounds(130,225,210,30);
 
 
@@ -87,6 +93,7 @@ public class Login {
     JButton b=new JButton("CONFIRMAR");
     b.setBounds(165, 280, 140, 40);
     b.setBackground(lil);
+    b.addActionListener(this);
      
 
     //ADICIONAR LABEL AO PANEL
@@ -107,6 +114,20 @@ public class Login {
 
     }
 
+    
+    @Override
+    //FUNÇÃO PARA FAZER LOGIN, VERIFICANDO SE OS CAMPOS ESTÃO TODOS PREENCHIDOS
+    public void actionPerformed(ActionEvent e) {
+      if(textfieldip.getText().length() > 0 && textfieldHASH.getText().length() > 0 && textfieldporta.getText().length() > 0){
+        janela.dispose();
+        TipoOperacao to = new TipoOperacao();
+      }else {
+        JOptionPane.showMessageDialog(null, "Os campos tem de ser todos preenchidos!");
+      }
+    }
+
+
+    //FUNÇÃO PARA CORRER O PROGRAMA
     public Login(){
       construir();
     }
