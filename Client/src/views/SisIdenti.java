@@ -1,21 +1,37 @@
 package views;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class SisIdenti{
-    public SisIdenti(){}
+public class SisIdenti implements ActionListener{
+
+    //TEXT FIELD USER
+    JTextField t_user=new JTextField();
+    //TEXT FIELD CC
+    JTextField t_cc=new JTextField();
+    //TEXT FIELD IP
+    JTextField t_ip=new JTextField();
+    
     //METODO QUE VAI CONSTRUIR A NOSSA JANELA
     public void construir(){
         //Inicializar janela principal  
         JFrame janela=new JFrame();
         //TAMANHO DA JANELA
         janela.setBounds(300,0,500,480);
+        //COLOCAR NO CENTRO DA TELA
+        janela.setLocationRelativeTo(null);
+        //DESATIVAR O BOTÃO DE AUMENTAR A JANELA
+        janela.setResizable(false);
+        //FECHAR O PROGRAMA NO BOTÃO 'X'
+        janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //BACKGROUND COLOR
         janela.setBackground(Color.lightGray);
 
@@ -47,9 +63,8 @@ public class SisIdenti{
         //POSICAO E TAMANHO DO TEXTO
         j_user.setBounds(130,70,200,12);
 
-        //TEXT FIELD USER
-        JTextField t_user=new JTextField();
-        //TAMANHO
+
+        //TAMANHO DO TEXTFIELD USER
         t_user.setBounds(130,85,210,30);
 
         //LABEL CC 
@@ -59,9 +74,8 @@ public class SisIdenti{
         //POSICAO E TAMANHO DO TEXTO
         j_cc.setBounds(130,135,200,12);
                 
-        //TEXT FIELD CC
-        JTextField t_cc=new JTextField();
-        //TAMANHO
+
+        //TAMANHO DO TEXT FIELD CC
         t_cc.setBounds(130,150,210,30);
 
         //LABEL IP
@@ -71,9 +85,8 @@ public class SisIdenti{
         //POSICAO E TAMANHO DO TEXTO
         j_ip.setBounds(130,200,200,12);
             
-        //TEXT FIELD IP
-        JTextField t_ip=new JTextField();
-        //TAMANHO
+        
+        //TAMANHO DO TEXT FIELD IP
         t_ip.setBounds(130,215,210,30);
 
 
@@ -81,6 +94,7 @@ public class SisIdenti{
         JButton b=new JButton("CONFIRMAR");
         b.setBounds(165, 265, 140, 40);
         b.setBackground(lil);
+        b.addActionListener(this);
 
         //LABEL HASH
         JLabel j_hash=new JLabel("RESPOSTA DO SERVIDOR:");
@@ -112,6 +126,26 @@ public class SisIdenti{
         janela.setLayout(null);
         janela.setVisible(true);
 
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+        if(t_user.getText().length() > 0){
+            JOptionPane.showMessageDialog(null, "O Username tem de ser preenchido!");
+        }
+        if(t_user.getText().length() > 0){
+            JOptionPane.showMessageDialog(null, "O Username tem de ser preenchido!");
+        }
+        if(t_user.getText().length() > 0){
+            JOptionPane.showMessageDialog(null, "O Username tem de ser preenchido!");
+        }
+    }
+
+
+    
+    public SisIdenti(){
+        construir();
     }
 
 }

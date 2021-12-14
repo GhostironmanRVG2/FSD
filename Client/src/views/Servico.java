@@ -10,13 +10,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Servico{
-    public Servico(){}
     //METODO QUE VAI CONSTRUIR A NOSSA JANELA
     public void construir(){
         //Inicializar janela principal  
         JFrame janela=new JFrame();
         //TAMANHO DA JANELA
         janela.setBounds(300,0,500,480);
+        //COLOCAR NO CENTRO DA TELA
+        janela.setLocationRelativeTo(null);
+        //DESATIVAR O BOTÃO DE AUMENTAR A JANELA
+        janela.setResizable(false);
+        //FECHAR O PROGRAMA NO BOTÃO 'X'
+        janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //BACKGROUND COLOR
         janela.setBackground(Color.lightGray);
 
@@ -113,6 +118,13 @@ public class Servico{
         janela.setLayout(null);
         janela.setVisible(true);
 
+    }
+
+
+    
+
+    public Servico(){
+        construir();
     }
 
 }
