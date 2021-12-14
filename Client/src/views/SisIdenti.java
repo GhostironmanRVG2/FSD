@@ -13,6 +13,8 @@ import javax.swing.JTextField;
 
 public class SisIdenti implements ActionListener{
 
+    //BOTAO
+    JButton b=new JButton("CONFIRMAR");
     //TEXT FIELD USER
     JTextField t_user=new JTextField();
     //TEXT FIELD CC
@@ -90,10 +92,10 @@ public class SisIdenti implements ActionListener{
         t_ip.setBounds(130,215,210,30);
 
 
-        //BOTAO
-        JButton b=new JButton("CONFIRMAR");
+        //BOTÃO
         b.setBounds(165, 265, 140, 40);
         b.setBackground(lil);
+        //LER O BOTÃO
         b.addActionListener(this);
 
         //LABEL HASH
@@ -130,20 +132,15 @@ public class SisIdenti implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
-        if(t_user.getText().length() > 0){
-            JOptionPane.showMessageDialog(null, "O Username tem de ser preenchido!");
-        }
-        if(t_user.getText().length() > 0){
-            JOptionPane.showMessageDialog(null, "O Username tem de ser preenchido!");
-        }
-        if(t_user.getText().length() > 0){
-            JOptionPane.showMessageDialog(null, "O Username tem de ser preenchido!");
+        if(t_user.getText().length() > 0 && t_cc.getText().length() > 0 && t_ip.getText().length() > 0){
+            System.out.printf("A FUNCIONAR");
+        } else {
+            JOptionPane.showMessageDialog(null, "Os campos tem de ser todos preenchidos!");
         }
     }
 
 
-    
+    //FUNÇÃO PARA CORRER A JANELA
     public SisIdenti(){
         construir();
     }
