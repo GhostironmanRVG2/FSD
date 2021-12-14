@@ -52,6 +52,8 @@ public void construir(){
     JComboBox cb=new JComboBox(ops);
     //Tamanho
     cb.setBounds(250,67,90,20);
+    //COLOR
+    cb.setBackground(lil);
     //BOTAO
     JButton b=new JButton("CONFIRMAR");
     b.setBounds(165, 120, 140, 40);

@@ -8,15 +8,17 @@ import java.net.Socket;
 
 public class One {
 String ip , hash;
-int porta;
+int porta,decisao;
 //CONSTRUTOR DA NOSSA THREAD QUE VAI COMUNICAR COM O NOSSO SERVIDOR
-public One(String ip , int porta, String hash){
+public One(String ip , int porta, String hash,int decisao){
 //IP DO SERVER
 this.ip=ip;
 //PORTA DO SERVER
 this.porta=porta;
 //HASH DO SERVER
 this.hash=hash;
+//decisao
+this.decisao=decisao;
 }
 
 
@@ -34,6 +36,12 @@ out.println("C");
 out.println(hash);
 //ENVIAR TIPO DE SERVICO
 out.println("1");
+//ENVIAR TIPO DE SERVICO
+if(decisao==1){
+out.println("RMI");
+}else{
+out.println("SOCKET");
+}
 //PREENCHER BLOCO
 out.flush();
 //LER A RESPOSTA DO SERVIDOR, CASO O POINTER AVANCE PARA UMA LINHA QUE NAO EXISTE ELE LEVANTA UMA EXCEPTION MAS APENAS DIZ QUE CHEGOU AO FIM

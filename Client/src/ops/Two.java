@@ -8,10 +8,10 @@ import java.net.Socket;
 
 public class Two {
 
-        String ip ,hash,designacao_servico,ip_servico;
+        String ip ,hash,designacao_servico,ip_servico,tipo_servico;
         int porta;
         //CONSTRUTOR DA NOSSA THREAD QUE VAI COMUNICAR COM O NOSSO SERVIDOR
-        public Two(String ip , int porta, String hash,String designacao_servico,String ip_servico){
+        public Two(String ip , int porta, String hash,String designacao_servico,String ip_servico,String tipo_servico){
         //IP DO SERVER
         this.ip=ip;
         //PORTA DO SERVER
@@ -21,7 +21,9 @@ public class Two {
         //DESIGNACAO DO SERVICO
         this.designacao_servico=designacao_servico;
         //IP DO SERVICO
-        this.ip_servico=ip_servico;   
+        this.ip_servico=ip_servico;
+        //TIPO
+        this.tipo_servico=tipo_servico;
         }
         
         
@@ -43,6 +45,8 @@ public class Two {
         out.println(designacao_servico);
         //ENVIAR IP DO SERVICO
         out.println(ip_servico);
+        //TIPO DE SERVICO
+        out.println(tipo_servico);
         //PREENCHER BLOCO
         out.flush();
         //LER A RESPOSTA DO SERVIDOR

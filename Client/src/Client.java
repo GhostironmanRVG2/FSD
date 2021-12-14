@@ -69,8 +69,12 @@ public class Client {
        switch (Integer.valueOf(decisao2)) {
           //OPCAO PARA TER A LISTA DOS SERVICOS DISPONIVEIS
           case 1:
+          //PERGUNTAR QUAL TIPO DE SERVICOS QUER VER:
+          System.out.println("Prima 1 caso queira ver RMI , 2 caso Sockets");
+          String choose=scan.nextLine();
+          int deci=Integer.valueOf(choose);
           //INICIALIZAR O OBJETO QUE CONECTA AO SERVIDOR DE IDENTIFICACAO
-          One one=new One(ip_Server,Integer.valueOf(portastr),Hash);
+          One one=new One(ip_Server,Integer.valueOf(portastr),Hash,deci);
               //INVOCAR O MEOTODO QUE REALMENTE CONECTA E FAZ AS OPERACOES
               one.go();
              break;
@@ -84,8 +88,10 @@ public class Client {
             System.out.println("Introduza o IP:");
             //RECEBER O IP
             String ip_servico=scan.nextLine();
+            System.out.println("tipo de servico?");
             //OBJETO QUE EXECUTA OS METODOS
-            Two two=new Two(ip_Server,Integer.valueOf(portastr),Hash,designacao_servico,ip_servico);
+            String tipo_servico=scan.nextLine();
+            Two two=new Two(ip_Server,Integer.valueOf(portastr),Hash,designacao_servico,ip_servico,tipo_servico);
             //METODO EM SI
             two.go();
              break;

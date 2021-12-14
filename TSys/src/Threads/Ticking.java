@@ -62,16 +62,17 @@ public class Ticking {
       //OPCAO 1 DO CLIENTE EM QUE SO É PESSIVEL EFETUAR CASO A HASH CONTINUE A SER PARTE DO SISTEMA(LISTA DE SERVICOS)
     }else if(etapa.equals("1")&&h.existHash(hash)){
       
-
-
-      System.out.println("Lista");
+      //VERIFICAR A NOSSA DECISAO
+      String decisao=in.readLine();
       //ITERAR O NOSSO VETOR DE SERVICOS
       //UM TRY E UM CATCH CASO NAO HAJA SERVICOS
       try{
        //ITERAR
       for (int i = 0; i <= sv.getVect().size(); i++) {
         //COLOCAR NUMA LINHA DO BUFFER
-        out.println("Designacao: "+sv.getVect().get(i).getDesignacao()+" ip: "+sv.getVect().get(i).getIp());
+        if(sv.getVect().get(i).getTipo_servico().equals(decisao)){
+        out.println("ID: "+sv.getVect().get(i).getId_servico()+" Designacao: "+sv.getVect().get(i).getDesignacao()+" ip: "+sv.getVect().get(i).getIp()+" tipo: "+sv.getVect().get(i).getTipo_servico());
+        }
       }
        }catch(Exception e){
       //INFORMAR QUE NAO HA MAIS SERVICOS QUANDO DER OUT OF RANGE EM CASO DE NAO HAVER SERVICOS
@@ -82,12 +83,14 @@ public class Ticking {
 
       //OPCAO 2 DO CLIENTE EM QUE SO É PESSIVEL EFETUAR CASO A HASH CONTINUE A SER PARTE DO SISTEMA(CRIACAO DE SERVICOS)
     }else if(etapa.equals("2")&&h.existHash(hash)){
-      //LER DESIGNACAO DO SERVICO
+    //LER DESIGNACAO DO SERVICO
     String designacao_Servico=in.readLine();
-     //LER IP DO SERVICO
+    //LER IP DO SERVICO
     String ip_Servico=in.readLine();
+    //LER TIPO DE SERVICO
+    String tipo_servico=in.readLine();
     //CRIAR SERVICO E ADICIONA-LO AO VETOR
-    sv.addService(new Service(designacao_Servico,ip_Servico,"Socket"));
+    sv.addService(new Service(designacao_Servico,ip_Servico,tipo_servico));
     System.out.println("Criacao");
     out.println("Servico criado");
     }
