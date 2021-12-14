@@ -8,9 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Login {
-    public Login(){}
 
-    public void construir(){
+  public void construir(){
     //criacao de janela
     JFrame janela=new JFrame();
       //LOAD ICON
@@ -19,6 +18,12 @@ public class Login {
       janela.setIconImage(icon); 
     //TAMANHO DA JANELA
     janela.setBounds(300,0,500,400);
+    //COLOCAR NO CENTRO DA TELA
+    janela.setLocationRelativeTo(null);
+    //DESATIVAR O BOTÃO DE AUMENTAR A JANELA
+    janela.setResizable(false);
+    //FECHAR O PROGRAMA NO BOTÃO 'X'
+    janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     //COLOR
     Color lil = new Color(173,216,230);
     //BACKGROUND COLOR
@@ -100,6 +105,10 @@ public class Login {
     janela.setLayout(null);
     janela.setVisible(true);
 
-
     }
+
+    public Login(){
+      construir();
+    }
+
 }
