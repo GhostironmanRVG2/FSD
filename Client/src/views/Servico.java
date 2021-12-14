@@ -13,7 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Servico implements ActionListener{
-
+        //Inicializar janela principal  
+        JFrame janela=new JFrame();
         //TEXT FIELD USER
         JTextField t_ip=new JTextField();
         //TEXT FIELD CC
@@ -24,8 +25,10 @@ public class Servico implements ActionListener{
 
     //METODO QUE VAI CONSTRUIR A NOSSA JANELA
     public void construir(){
-        //Inicializar janela principal  
-        JFrame janela=new JFrame();
+        //LOAD ICON
+        Image icon = Toolkit.getDefaultToolkit().getImage("C:/Users/pedro/Desktop/universidade/3 ano/Projects/fsd projects/FSD_Project/Client/src/views/assets/icon.PNG");
+        //SET IT
+        janela.setIconImage(icon);
         //TAMANHO DA JANELA
         janela.setBounds(300,0,500,480);
         //COLOCAR NO CENTRO DA TELA

@@ -19,6 +19,10 @@ public class ListarServicos implements ActionListener{
 
     //METODO QUE VAI CONSTRUIR A NOSSA JANELA
     public void construir(){
+        //LOAD ICON
+        Image icon = Toolkit.getDefaultToolkit().getImage("C:/Users/pedro/Desktop/universidade/3 ano/Projects/fsd projects/FSD_Project/Client/src/views/assets/icon.PNG");
+        //SET IT
+        janela.setIconImage(icon);
         //COLOCAR NO CENTRO DA TELA
         janela.setLocationRelativeTo(null);
         //DESATIVAR O BOTÃO DE AUMENTAR A JANELA
