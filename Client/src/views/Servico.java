@@ -1,8 +1,10 @@
 package views;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.time.Instant;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -11,6 +13,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import views.*;
+import ops.ServiceSocket;
+import ops.Midle;
+
 import javax.swing.*;
 import java.awt.event.*;
 public class Servico implements ActionListener{
@@ -25,6 +31,8 @@ JLabel backb=new JLabel(new ImageIcon("./views/assets/l.png"));
         //COMBOBOX TIPO DE CONEXAO
         String s1[] = { "SOCKET", "RMI"};
         JComboBox c_tipo=new JComboBox(s1);
+        //TEXT FIELD RESPOSTA COM HASH
+        JTextArea t_resp = new JTextArea();
 
     //METODO QUE VAI CONSTRUIR A NOSSA JANELA
     public void construir(){
@@ -109,8 +117,6 @@ JLabel backb=new JLabel(new ImageIcon("./views/assets/l.png"));
         //POSICAO E TAMANHO DO TEXTO
         j_resp.setBounds(130,330,200,30);
 
-        //TEXT FIELD RESPOSTA COM HASH
-        JTextField t_resp = new JTextField();
         //TAMANHO
         t_resp.setBounds(130, 360, 210, 30);
 
@@ -151,15 +157,105 @@ JLabel backb=new JLabel(new ImageIcon("./views/assets/l.png"));
     //FUNÇÃO PARA VERIFICAR SE OS CAMPOS ESTÃO TODOS PREENCHIDOS
     public void actionPerformed(ActionEvent e) {
         if (t_ip.getText().length() > 0 && t_ts.getText().length() > 0){
+            //SACAR VALORES
             String tipoconex = c_tipo.getSelectedItem().toString();
+            String ip_porta=t_ip.getText();
+            String times=t_ts.getText();
+            //type of service
+            if(tipoconex.equals("RMI")){
+                //RMI
+                int porta=-1;
+                try {
+                    //IR BUSCAR A PORTA
+                    Integer.valueOf(ip_porta.substring(ip_porta.lastIndexOf(":")));
+                    JOptionPane.showMessageDialog(null, "RMI NAO LEVA PORTA!");
+                } catch (Exception exeptionporta) {porta=0;}
+                //SE NAO TIVER PORTA ENTAO..
+                if(porta==0){
+                
+                //VERIRICAR A TIMESTAMP
+                int isitatime=0;
+                Instant timestamp_servico=null;
+                try{
+                    //CONVERSAO DA TIMESTAMPs
+                 timestamp_servico = Instant.parse(times);
+                isitatime=1;
+                }catch(Exception timer){
+                    JOptionPane.showMessageDialog(null, "Timestamp nao valida");
+                }
+
+                //SE A TIMESTAMP FOR VALIDA
+                if(isitatime==1){
+                //INVOCAR OBJETO
+                Midle m=new Midle("localhost",times,ip_porta);
+                String resp=null;
+                try {
+                    resp = m.go();
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+                t_resp.setText(resp); 
+                }
+            }
+
+
+            }else{
+            //SOCKET
+            int porta_dois=-1;
+            //IR BUSCAR A PORTA
+            try {
+                //IR BUSCAR A PORTA
+                porta_dois=Integer.valueOf(ip_porta.substring(ip_porta.lastIndexOf(":")+1));
+            } catch (Exception exeptionporta) {
+                JOptionPane.showMessageDialog(null, "SOCKET TEM QUE TER UMA PORTA!");
+            }
+            //CASO A PORTA SEJA DIFERENTE DE -1
+            if(porta_dois!=-1){
+                //VERIRICAR A TIMESTAMP
+                int isitatime=0;
+                Instant timestamp_servico=null;
+                try{
+                    //CONVERSAO DA TIMESTAMP
+                 timestamp_servico = Instant.parse(times);
+                isitatime=1;
+                }catch(Exception timer){
+                    JOptionPane.showMessageDialog(null, "Timestamp nao valida");
+                }
+                //SE A TIMESTAMP FOR VALIDA
+                if(isitatime==1){
+                    // FAZER A CONEXAO PARA O SOCKET
+                    ServiceSocket S = new ServiceSocket(ip_porta.substring(0, ip_porta.lastIndexOf(":")), porta_dois, timestamp_servico);
+                    try {
+                        //REPOSTA
+                        List resp=S.go();
+                        //SE ENTROU COM SUCESSO ENTAO..
+                        if(resp.get(0).equals("200 OK")){
+                            //SETTAR O TEXTO COM A RESPOSTA
+                            t_resp.setText((String)resp.get(1));
+                        }else{
+                            //A TIMESTAMP NAO É VALIDA/PASSOU DO TEMPO
+                            JOptionPane.showMessageDialog(null, "A sua timestamp passou do tempo");
+                        }
+
+
+                    } catch (IOException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                        JOptionPane.showMessageDialog(null, "Algo deu errado..");
+                    }
+                }
+
+            
+            }
+        }
             
         } else {
             JOptionPane.showMessageDialog(null, "Os campos tem de ser todos preenchidos!");
 
         }
-        
-
     }
+
 
     //FUNÇÃO PARA CORRER O PROGRAMA
     public Servico(){

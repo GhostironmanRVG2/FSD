@@ -87,7 +87,7 @@ public void actionPerformed(ActionEvent e) {
   String e1 = "Registo";
   String e2 = "Login";
   String e3 = "Servico"; 
-  //CASO SEJA IGUAL A "REGISTO" ABRE UMA NOVA JANELA E ELIMINA A ATUAL 
+  //CASO SEJA IGUAL A "REGISTO" ABRE UMA NOVA JANELA E ELIMINA A ATUAL
   if(e1.equals(selectedValue)){
     janela.dispose();
     SisIdenti s=new SisIdenti();

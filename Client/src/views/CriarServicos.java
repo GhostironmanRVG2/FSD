@@ -1,14 +1,26 @@
 package views;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import ops.Two;
+
 import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
 public class CriarServicos implements ActionListener{
+    String ip,hash;
+    int porta;
+    //COMBOBOX TIPO DE CONEXAO
+    String s1[] = {"RMI", "SOCKET"};
+    JComboBox c_tipo=new JComboBox(s1);
     //LABEL IMAGEM
     JLabel backb=new JLabel(new ImageIcon("./views/assets/l.png"));
     //TEXT FIELD
@@ -71,12 +83,15 @@ public class CriarServicos implements ActionListener{
          labelip.setBounds(150,140,200,12);
          //TAMANHO DO TEXT FIELD DO IP
          textfieldip.setBounds(130,155,210,30);
+
+         //TAMANH0 DO COMBOBOX
+        c_tipo.setBounds(130, 200, 210, 30);
     
     
     
         //BOTAO
         JButton b=new JButton("CONFIRMAR");
-        b.setBounds(165, 220, 140, 40);
+        b.setBounds(165, 235, 140, 40);
         b.setBackground(lil);
         //LER O BOTÃO
         b.addActionListener(this);
@@ -87,7 +102,7 @@ public class CriarServicos implements ActionListener{
                 //dispose da janela
                 janela.dispose();
                 //CRIAR NOVA JANELA
-                TipoOperacao t=new TipoOperacao();
+                TipoOperacao t=new TipoOperacao(ip,hash,porta);
       
               }
         });
@@ -104,7 +119,8 @@ public class CriarServicos implements ActionListener{
         janela.add(labelip);
         janela.add(textfieldip);
         janela.add(b);
-        janela.add(backd);
+        janela.add(backb);
+        janela.add(c_tipo);
     
         janela.setLayout(null);
         janela.setVisible(true);
@@ -116,16 +132,72 @@ public class CriarServicos implements ActionListener{
         @Override
         //FUNÇÃO PARA CRIAR UM SERVIÇO, VERIFICANDO SE OS ESPAÇOS ESTÃO PREENCHIDOS
         public void actionPerformed(ActionEvent e) {
-            if(textfieldip.getText().length() > 0 && textfieldservice.getText().length() > 0){
-                System.out.println("funciona");
+            if(textfieldip.getText().length() > 0 && textfieldservice.getText().length() > 0&&textfieldservice.getText().length()<15&&textfieldip.getText().length()<17){
+                //SACAR FIELDS
+                String ip_criacao=textfieldip.getText();
+                String designacao_servico=textfieldservice.getText();
+                String tipo = c_tipo.getSelectedItem().toString();
+                //VERIFICAR SE É RMI OU SOCKET
+                if(tipo.equals("RMI")){
+                    int tem_porta;
+                //SE FOR RMI FAZ ISTO
+                try{
+                    //VERIFICA SE TEM UMA PORTA.. SE TIVER PORTA RETORNA ERRO
+                    ip_criacao.substring(ip_criacao.lastIndexOf(":"));
+                    tem_porta=1;
+                    JOptionPane.showMessageDialog(null, "RMI nao tem porta!");
+                    }catch(Exception error){
+                    tem_porta=0;
+                    }
+                if(tem_porta==0){
+                try {
+                    Two two=new Two(ip,porta,hash,designacao_servico,ip_criacao,"RMI");
+                    two.go();
+                    JOptionPane.showMessageDialog(null, "SERVICO CRIADO!");
+
+
+                } catch (Exception exC) {
+                    //TODO: handle exception
+                    JOptionPane.showMessageDialog(null, "ERRO AO CRIAR O SERVICO!");
+                }
+            }
+                
+                }else{
+                int tem_porta;
+                try{
+                    //VERIFICA SE TEM UMA PORTA.. SE TIVER PORTA RETORNA ERRO
+                    ip_criacao.substring(ip_criacao.lastIndexOf(":"));
+                    tem_porta=1;
+                    }catch(Exception error){
+                    tem_porta=0;
+                    JOptionPane.showMessageDialog(null, "SOCKET TEM QUE TER UMA PORTA!");
+                    }
+                //SENAO FAZ ISTO
+                //SE TIVER PORTA ELE VAI
+                if(tem_porta==1){
+                try {
+                    Two two=new Two(ip,porta,hash,designacao_servico,ip_criacao,"SOCKET");
+                    two.go();
+                    JOptionPane.showMessageDialog(null, "SERVICO CRIADO!");
+                } catch (Exception exC) {
+                    //TODO: handle exception
+                    JOptionPane.showMessageDialog(null, "ERRO AO CRIAR O SERVICO!");
+                }
+            }
+                }
+            
+                
             } else {
-                JOptionPane.showMessageDialog(null, "Os campos tem de ser todos preenchidos!");
+                JOptionPane.showMessageDialog(null, "Os campos tem de ser todos preenchidos/nao pode execer 14 caracteres na designacao/nao pode exceder 16 caracteres no ip!");
             }
             
         }
     
         //FUNÇÃO PARA CORRER O PROGRAMA
-        public CriarServicos(){
+        public CriarServicos(String ip,String hash,int porta){
+            this.ip=ip;
+            this.hash=hash;
+            this.porta=porta;
             construir();
         }
 

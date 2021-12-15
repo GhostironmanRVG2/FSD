@@ -18,6 +18,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import java.awt.*;
 import ops.*;
+import javax.swing.*;
+import java.awt.event.*;
 public class ListarServicos implements ActionListener{
     //INICIALIZAR PARAMETROS CONSTANTES
     String ip,hash;
@@ -125,7 +127,7 @@ public class ListarServicos implements ActionListener{
             //dispose da janela
             janela.dispose();
             //CRIAR NOVA JANELA
-            TipoOperacao t=new TipoOperacao(ip,porta,hash);
+            TipoOperacao t=new TipoOperacao(ip,hash,porta);
   
           }
         });

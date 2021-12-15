@@ -7,7 +7,6 @@ public class ServicesServer {
 	String SERVICE_NAME="/TemperatureService";
 
 	private void bindRMI(Sources sources) throws RemoteException {
-        
 
 		try { 
 			LocateRegistry.createRegistry(1099);

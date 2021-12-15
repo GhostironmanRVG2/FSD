@@ -11,12 +11,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
+import javax.swing.*;
+import java.awt.event.*;
 
 public class TipoOperacao implements ActionListener{
   String ip,hash;
   int porta;
-    //LABEL IMAGEM
-    JLabel backb=new JLabel(new ImageIcon("./views/assets/l.png")); 
     //Inicializar janela principal  
     JFrame janela=new JFrame();
     //Buffer
@@ -71,14 +71,14 @@ public void construir(){
     b.setBounds(165, 120, 140, 40);
     b.setBackground(lil);
     b.addActionListener(this);
-
+    JLabel backb=new JLabel(new ImageIcon("./views/assets/l.png"));
     //FAZER O BOTAO CLICAVEL
     backb.addMouseListener(new MouseAdapter() {
       public void mouseClicked(MouseEvent me) {
           //dispose da janela
           janela.dispose();
           //CRIAR NOVA JANELA
-          Login t=new Login();
+          Login l=new Login();
 
         }
     });
@@ -112,7 +112,7 @@ public void actionPerformed(ActionEvent e) {
       ListarServicos ls = new ListarServicos(ip,porta,hash);
     }else if (selectCB.equals(e2)){
       janela.dispose();
-      CriarServicos cs = new CriarServicos();
+      CriarServicos cs = new CriarServicos(ip,hash,porta);
     }
 }
 

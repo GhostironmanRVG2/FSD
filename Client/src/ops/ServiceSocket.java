@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.security.Timestamp;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sound.sampled.SourceDataLine;
 
@@ -24,8 +26,8 @@ public class ServiceSocket {
         this.Timestamp = Timestamp;
     } 
     
-    public void go()throws IOException{
-
+    public List go()throws IOException{
+        List<String> resp=new ArrayList<String>();
         //CRIAR A SOCKET QUE VAI LIGAR
         Socket ligacao=new Socket(ip,porta);
         //BUFFER READER
@@ -38,9 +40,10 @@ public class ServiceSocket {
         out.flush();
         //RESPOSTA
         String resposta = in.readLine();
-        String respostadois = in.readLine();
-        System.out.println(resposta);
-        System.out.println(respostadois);
+        String respostadois=in.readLine();
+        //RESPOSTAS
+        resp.add(resposta);
+        resp.add(respostadois);
         
         //FECHAR O IN
         in.close();
@@ -48,5 +51,6 @@ public class ServiceSocket {
         out.close();
         //FECHAR LIGACAO
         ligacao.close();
+        return resp;
         }
 }
