@@ -14,8 +14,13 @@ import javax.swing.JTextField;
 import javax.swing.*;
 import java.awt.event.*;
 public class Servico implements ActionListener{
+<<<<<<< HEAD
 //LABEL IMAGEM
 JLabel backb=new JLabel(new ImageIcon("C:/Users/pedro/Desktop/universidade/3 ano/Projects/fsd projects/FSD_Project/Client/src/views/assets/l.png"));
+=======
+        //Inicializar janela principal  
+        JFrame janela=new JFrame();
+>>>>>>> 947a1826c720367afdea6808d5768b84f3aaa317
         //TEXT FIELD USER
         JTextField t_ip=new JTextField();
         //TEXT FIELD CC
@@ -26,8 +31,10 @@ JLabel backb=new JLabel(new ImageIcon("C:/Users/pedro/Desktop/universidade/3 ano
 
     //METODO QUE VAI CONSTRUIR A NOSSA JANELA
     public void construir(){
-        //Inicializar janela principal  
-        JFrame janela=new JFrame();
+        //LOAD ICON
+        Image icon = Toolkit.getDefaultToolkit().getImage("C:/Users/pedro/Desktop/universidade/3 ano/Projects/fsd projects/FSD_Project/Client/src/views/assets/icon.PNG");
+        //SET IT
+        janela.setIconImage(icon);
         //TAMANHO DA JANELA
         janela.setBounds(300,0,500,480);
         //COLOCAR NO CENTRO DA TELA

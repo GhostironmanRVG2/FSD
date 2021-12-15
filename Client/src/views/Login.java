@@ -28,10 +28,10 @@ JLabel backb=new JLabel(new ImageIcon("C:/Users/pedro/Desktop/universidade/3 ano
 
   public void construir(){
 
-      //LOAD ICON
-      Image icon = Toolkit.getDefaultToolkit().getImage("C:/Users/pedro/Desktop/universidade/3 ano/Projects/fsd projects/FSD_Project/Client/src/views/assets/icon.PNG");
-      //SET IT
-      janela.setIconImage(icon); 
+    //LOAD ICON
+    Image icon = Toolkit.getDefaultToolkit().getImage("C:/Users/pedro/Desktop/universidade/3 ano/Projects/fsd projects/FSD_Project/Client/src/views/assets/icon.PNG");
+    //SET IT
+    janela.setIconImage(icon); 
     //TAMANHO DA JANELA
     janela.setBounds(300,0,500,400);
     //COLOCAR NO CENTRO DA TELA

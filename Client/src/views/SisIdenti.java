@@ -15,10 +15,16 @@ import javax.swing.event.MouseInputAdapter;
 import javax.swing.*;
 import java.awt.event.*;
 
+<<<<<<< HEAD
 
 public class SisIdenti implements ActionListener{
     //LABEL IMAGEM
     JLabel backb=new JLabel(new ImageIcon("C:/Users/pedro/Desktop/universidade/3 ano/Projects/fsd projects/FSD_Project/Client/src/views/assets/l.png"));
+=======
+public class SisIdenti implements ActionListener{
+    //Inicializar janela principal  
+    JFrame janela=new JFrame();
+>>>>>>> 947a1826c720367afdea6808d5768b84f3aaa317
     //BOTAO
     JButton b=new JButton("CONFIRMAR");
     //TEXT FIELD USER
@@ -30,8 +36,10 @@ public class SisIdenti implements ActionListener{
     
     //METODO QUE VAI CONSTRUIR A NOSSA JANELA
     public void construir(){
-        //Inicializar janela principal  
-        JFrame janela=new JFrame();
+        //LOAD ICON
+        Image icon = Toolkit.getDefaultToolkit().getImage("C:/Users/pedro/Desktop/universidade/3 ano/Projects/fsd projects/FSD_Project/Client/src/views/assets/icon.PNG");
+        //SET IT
+        janela.setIconImage(icon);
         //TAMANHO DA JANELA
         janela.setBounds(300,0,500,480);
         //COLOCAR NO CENTRO DA TELA
