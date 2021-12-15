@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.*;
 import java.awt.event.*;
+import ops.ConVerify;;
 
 public class Login implements ActionListener{
 //LABEL IMAGEM
@@ -137,8 +138,39 @@ JLabel backb=new JLabel(new ImageIcon("C:/Users/pedro/Desktop/universidade/3 ano
     //FUNÇÃO PARA FAZER LOGIN, VERIFICANDO SE OS CAMPOS ESTÃO TODOS PREENCHIDOS
     public void actionPerformed(ActionEvent e) {
       if(textfieldip.getText().length() > 0 && textfieldHASH.getText().length() > 0 && textfieldporta.getText().length() > 0){
+        //SACAR OS DADOS DO IP
+        String ip=textfieldip.getText();
+        //SACAR DADOS DA PORTA
+        String portastr=textfieldporta.getText();
+        //INICIALIZAR DADOS COMO 0 , CASO DE EXEPTION VAI IR COMO 0 E DA SIMPLESMENTE ERRO EM BAIXO
+        int porta=-1;
+        try{
+        porta=Integer.valueOf(portastr);
+        }catch(Exception convertEx){}
+        //SACAR DADOS DA HASH
+        String Hash=textfieldHASH.getText();
+        //CODIGO DE VERIFICACAO
+        String cod_verificacao;
+        //FAZER A CONEXAO
+        try{
+        //VERIFICAR A CONEXAO
+        ConVerify conexao=new ConVerify(ip, porta,Hash);
+        //BUSCAR CODIGO DE VERIFICACAO
+        cod_verificacao=conexao.go();
+        }catch(Exception ex){
+        //CASO DE EXCEPTION ATRIBUIR UM CODIGO DE ERRO 400
+        cod_verificacao="400";
+        }
+        //FAZER VERIFICACAO DO CODIGO DE ERRO QUE DEU
+        if(cod_verificacao.equals("200")){
+        //SE O CODIGO FOR 200 PASSAMOS PARA A PROXIMA WINDOW
         janela.dispose();
-        TipoOperacao to = new TipoOperacao();
+        TipoOperacao to = new TipoOperacao(ip,Hash,porta);
+        }else{
+        //MENSAGEM DE ERRO
+        JOptionPane.showMessageDialog(null,"Algo deu errado com o seu login");
+        
+        }
       }else {
         JOptionPane.showMessageDialog(null, "Os campos tem de ser todos preenchidos!");
       }

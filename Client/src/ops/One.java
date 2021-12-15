@@ -5,6 +5,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.lang.reflect.Array;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 public class One {
 String ip , hash;
@@ -22,8 +24,8 @@ this.decisao=decisao;
 }
 
 
-public void go()throws IOException{
-
+public List go()throws IOException{
+List<String> lista=new ArrayList<String>();
 //CRIAR A SOCKET QUE VAI LIGAR
 Socket ligacao=new Socket(ip,porta);
 //BUFFER READER
@@ -52,7 +54,7 @@ String msgRecebida=in.readLine();
    //CASO HAJA UMA LINHA NULL DAR BREAK AO WHILE
 if(msgRecebida.equals(null)){break;}
    //ESCREVER A MSG NA CONSOLA
-System.out.println("[SERVER]->"+msgRecebida);
+lista.add(msgRecebida);
 }
 }catch(Exception e){
     //CASO DE UM ERRO NO BUFFER
@@ -64,6 +66,7 @@ in.close();
 out.close();
 //FECHAR LIGACAO
 ligacao.close();
+return lista;
 }
 
 

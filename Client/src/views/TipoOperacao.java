@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JFrame;
 
 public class TipoOperacao implements ActionListener{
+  String ip,hash;
+  int porta;
     //Inicializar janela principal  
     JFrame janela=new JFrame();
     //Buffer
@@ -90,7 +92,7 @@ public void actionPerformed(ActionEvent e) {
     String e2 = "Criar";
     if(selectCB.equals(e1)){
       janela.dispose();
-      ListarServicos ls = new ListarServicos();
+      ListarServicos ls = new ListarServicos(ip,porta,hash);
     }else if (selectCB.equals(e2)){
       janela.dispose();
       CriarServicos cs = new CriarServicos();
@@ -98,7 +100,10 @@ public void actionPerformed(ActionEvent e) {
 }
 
 //FUNÇÃO PARA EXECUTAR O PROGRAMA
-public TipoOperacao(){
+public TipoOperacao(String ip,String hash,int porta){
+  this.ip=ip;
+  this.hash=hash;
+  this.porta=porta;
   construir();
 }
 

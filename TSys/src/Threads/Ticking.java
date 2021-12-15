@@ -71,13 +71,12 @@ public class Ticking {
       for (int i = 0; i <= sv.getVect().size(); i++) {
         //COLOCAR NUMA LINHA DO BUFFER
         if(sv.getVect().get(i).getTipo_servico().equals(decisao)){
-        out.println("ID: "+sv.getVect().get(i).getId_servico()+" Designacao: "+sv.getVect().get(i).getDesignacao()+" ip: "+sv.getVect().get(i).getIp()+" tipo: "+sv.getVect().get(i).getTipo_servico());
+        out.println("ID: "+sv.getVect().get(i).getId_servico()+"name: "+sv.getVect().get(i).getDesignacao()+" ip: "+sv.getVect().get(i).getIp()+" tipo: "+sv.getVect().get(i).getTipo_servico());
         }
       }
        }catch(Exception e){
       //INFORMAR QUE NAO HA MAIS SERVICOS QUANDO DER OUT OF RANGE EM CASO DE NAO HAVER SERVICOS
       //CRIAR TIMESTAMP PARA O CLIENTE ???
-      out.println("##### TimeStamp: " + java.time.Clock.systemUTC().instant() + " ######");
       out.println("#####No more services available#####");
       }
 

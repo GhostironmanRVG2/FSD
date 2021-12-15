@@ -3,6 +3,11 @@ package views;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -14,8 +19,9 @@ import javax.swing.JTextField;
 import javax.swing.event.MouseInputAdapter;
 import javax.swing.*;
 import java.awt.event.*;
+import ops.Identification;
 
-<<<<<<< HEAD
+
 
 public class SisIdenti implements ActionListener{
     //LABEL IMAGEM
@@ -28,9 +34,8 @@ public class SisIdenti implements ActionListener{
     JTextField t_user=new JTextField();
     //TEXT FIELD CC
     JTextField t_cc=new JTextField();
-    //TEXT FIELD IP
-    JTextField t_ip=new JTextField();
-    
+     //TEXT FIELD RESPOSTA COM HASH
+     JTextArea t_hash = new JTextArea();
     //METODO QUE VAI CONSTRUIR A NOSSA JANELA
     public void construir(){
         //LOAD ICON
@@ -38,7 +43,7 @@ public class SisIdenti implements ActionListener{
         //SET IT
         janela.setIconImage(icon);
         //TAMANHO DA JANELA
-        janela.setBounds(300,0,500,480);
+        janela.setBounds(300,0,500,400);
         //COLOCAR NO CENTRO DA TELA
         janela.setLocationRelativeTo(null);
         //DESATIVAR O BOTÃO DE AUMENTAR A JANELA
@@ -74,25 +79,25 @@ public class SisIdenti implements ActionListener{
         //DEF DE TEXTO
         j_user.setFont(new Font("Italic",Font.BOLD,12));
         //POSICAO E TAMANHO DO TEXTO
-        j_user.setBounds(130,70,200,12);
+        j_user.setBounds(140,70,200,12);
 
 
         //TAMANHO DO TEXTFIELD USER
         t_user.setBounds(130,85,210,30);
 
         //LABEL CC 
-        JLabel j_cc=new JLabel("INTRODUZA O SEU NUMERO DE CC:");
+        JLabel j_cc=new JLabel("INTRODUZA O SEU CC:");
         //DEF DE TEXTO
         j_cc.setFont(new Font("Italic",Font.BOLD,12));
         //POSICAO E TAMANHO DO TEXTO
-        j_cc.setBounds(130,135,200,12);
+        j_cc.setBounds(165,135,200,12);
                 
 
         //TAMANHO DO TEXT FIELD CC
         t_cc.setBounds(130,150,210,30);
 
         //BOTÃO
-        b.setBounds(165, 265, 140, 40);
+        b.setBounds(165, 190, 140, 40);
         b.setBackground(lil);
         //LER O BOTÃO
         b.addActionListener(this);
@@ -102,13 +107,9 @@ public class SisIdenti implements ActionListener{
         //DEF DE TEXTO
         j_hash.setFont(new Font("Italic",Font.BOLD,12));
         //POSICAO E TAMANHO DO TEXTO
-        j_hash.setBounds(130,330,200,30);
-
-        //TEXT FIELD RESPOSTA COM HASH
-        JTextField t_hash = new JTextField();
+        j_hash.setBounds(160,230,200,30);
         //TAMANHO
-        t_hash.setBounds(130, 360, 210, 30);
-
+        t_hash.setBounds(70, 260, 340, 50);
         //FAZER O BOTAO CLICAVEL
         backb.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
@@ -144,8 +145,39 @@ public class SisIdenti implements ActionListener{
     @Override
     //FUNÇÃO PARA VERIFICAR SE OS CAMPOS ESTÃO TODOS PREENCHIDOS
     public void actionPerformed(ActionEvent e) {
-        if(t_user.getText().length() > 0 && t_cc.getText().length() > 0 && t_ip.getText().length() > 0){
-            System.out.printf("A FUNCIONAR");
+        if(t_user.getText().length() > 0 && t_cc.getText().length() > 0){
+            
+            //IR BUSCAR NOME
+            String nome= t_user.getText();
+            //IR BUSCAR CC
+            String cc= t_cc.getText();
+            //IR BUSCAR IP
+            InetAddress ipi=null;
+            try {
+              ipi=InetAddress.getLocalHost();
+            } catch (UnknownHostException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            String ip= ipi.toString();
+            //JUNTAR TUDO NUMA MSG
+            String msg="["+nome+"/"+ip+"/"+cc+"]";
+            //CRIAR UM OBJ IDENTIFICATION
+            Identification I=new Identification(msg);
+            //DAR RUN DO SEU METODO PARA FAZER A IDENTIFICACAO
+            try {
+                //PASSAR O RETORNO DA RESPOSTA PARA UMA LISTA RESPOSTA
+               List resposta=I.go();
+               //EXTRAIR VALORES DA LISTA
+               String hash=(String) resposta.get(0);
+               String ip_resp= (String) resposta.get(1);
+               String porta= (String) resposta.get(2);
+               //INSERIOR NO RESULTADO
+               t_hash.setText("Hash: "+hash+"\nIp: "+ip_resp+"\nporta: "+porta);
+            } catch (IOException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Os campos tem de ser todos preenchidos!");
         }

@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.net.InetAddress;
 import java.time.Instant;
+import java.util.List;
 import java.util.Scanner;
 import ops.*;
 import java.rmi.AccessException;
@@ -34,7 +35,7 @@ public class Client {
        //Juntar nome+ip
        String msg="["+nome+"/"+ip+"/"+bi+"]";
        Identification I=new Identification(msg);
-       I.go();
+       List l=I.go();
        break;
        case 2://CASO DE FAZER O LOGIN NUM SERVIDOR
        //PERGUNTAR IP

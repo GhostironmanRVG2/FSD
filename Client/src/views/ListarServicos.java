@@ -1,22 +1,43 @@
 package views;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import java.awt.*;
-
+import ops.*;
 public class ListarServicos implements ActionListener{
-
+    //INICIALIZAR PARAMETROS CONSTANTES
+    String ip,hash;
+    int porta;
     //Inicializar janela principal  
     JFrame janela=new JFrame();
     //COMBOBOX TIPO DE CONEXAO
-    String s1[] = {"HUMIDADE", "TEMPERATURA"};
+    String s1[] = {"RMI", "SOCKET"};
     JComboBox c_tipo=new JComboBox(s1);
-
+    //criar painel
+    JPanel panel_scroll = new JPanel();
+    //LISTA
+    DefaultListModel<String> lista=new DefaultListModel<String>();
+    //lista onde inserimos a list
+    final JList<String> list = new JList<String>(lista);
+    //scrollpane
+    JScrollPane scrollPane = new JScrollPane();
+    //TEXT AREA
+    JTextArea a=new JTextArea();
+    
     //METODO QUE VAI CONSTRUIR A NOSSA JANELA
     public void construir(){
         //LOAD ICON
@@ -77,18 +98,24 @@ public class ListarServicos implements ActionListener{
         j_resp.setFont(new Font("Italic",Font.BOLD,12));
         //POSICAO E TAMANHO DO TEXTO
         j_resp.setBounds(160,160,200,30);
-
-        //TEXT FIELD RESPOSTA COM HASH
-        JTextField t_resp = new JTextField();
-        //TAMANHO
-        t_resp.setBounds(130, 190, 210, 100);
-
+         //FAZER COM QUE SEJA SCROLLABEL
+         scrollPane.setViewportView(list);
+         //TAMANHO DO PANEL
+         scrollPane.setBounds(0,0,380,200);
+         list.setLayoutOrientation(JList.VERTICAL);
+         //TAMANHO DO PANEL
+         panel_scroll.setBounds(40,200,400,200);
+         //ADICIONAR O SCROLL AO PANEL
+         panel_scroll.add(scrollPane);
         //BOTAO
         JButton b=new JButton("CONFIRMAR");
         b.setBounds(165, 360, 140, 40);
         b.setBackground(lil);
         //LER O BOTÃO
         b.addActionListener(this);
+
+        //SET POS
+        a.setBounds(110,410,250,18);
 
         //ADICIONAR LABEL AO PANEL
         panel.add(Titulo);
@@ -97,9 +124,10 @@ public class ListarServicos implements ActionListener{
         janela.add(borda);
         janela.add(b);
         janela.add(j_resp);
-        janela.add(t_resp); 
         janela.add(j_tipo);
         janela.add(c_tipo);
+        janela.add(panel_scroll);
+        janela.add(a);
 
         janela.setLayout(null);
         janela.setVisible(true);
@@ -111,12 +139,55 @@ public class ListarServicos implements ActionListener{
     @Override
     //FUNÇÃO PARA GUARDAR A OPÇÃO SELECIONADA NA COMBOBOX
     public void actionPerformed(ActionEvent e) {
+        //BUSCAR OP
         String tipo = c_tipo.getSelectedItem().toString();
-        
+        //INIT OPCOES
+        String op1="RMI";
+        String op2="SOCKET";
+        if(op1.equals(tipo)){
+        //INICIALIZAR O OBJETO QUE CONECTA AO SERVIDOR DE IDENTIFICACAO
+        One one=new One(ip,porta,hash,1);
+        //RESULTADO E INSERIR RESULTADO NA LISTA
+        try {
+            List result=one.go();
+            lista.clear();
+        //INSERIOR O RESULTADO NUMA LISTA
+        for (int i = 0; i < result.size(); i++) {
+            lista.addElement((String)result.get(i));
+        }
+        } catch (IOException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+
+
+        }else{
+//INICIALIZAR O OBJETO QUE CONECTA AO SERVIDOR DE IDENTIFICACAO
+One one=new One(ip,porta,hash,2);
+//RESULTADO E INSERIR RESULTADO NA LISTA
+try {
+    List result=one.go();
+    lista.clear();
+//INSERIOR O RESULTADO NUMA LISTA
+for (int i = 0; i < result.size(); i++) {
+    lista.addElement((String)result.get(i));
+}
+} catch (IOException e1) {
+    // TODO Auto-generated catch block
+    e1.printStackTrace();
+}
+
+        }
+
+        //SETTAR TEXTO COM TIMESTAMP
+ a.setText("TimeStamp:"+Instant.now());
     }
 
     //FUNÇÃO PARA EXECUTAR O PROGRAMA
-    public ListarServicos(){
+    public ListarServicos(String ip,int porta,String hash){
+        this.ip=ip;
+        this.porta=porta;
+        this.hash=hash;
         construir();
     }
 }

@@ -14,13 +14,10 @@ import javax.swing.JTextField;
 import javax.swing.*;
 import java.awt.event.*;
 public class Servico implements ActionListener{
-<<<<<<< HEAD
 //LABEL IMAGEM
 JLabel backb=new JLabel(new ImageIcon("C:/Users/pedro/Desktop/universidade/3 ano/Projects/fsd projects/FSD_Project/Client/src/views/assets/l.png"));
-=======
         //Inicializar janela principal  
         JFrame janela=new JFrame();
->>>>>>> 947a1826c720367afdea6808d5768b84f3aaa317
         //TEXT FIELD USER
         JTextField t_ip=new JTextField();
         //TEXT FIELD CC

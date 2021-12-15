@@ -5,12 +5,15 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 public class Identification {
     String msg;
   public Identification(String msg){this.msg=msg;}
 
-  public void go()throws IOException{
-
+  public List go()throws IOException{
+  //CRIAR LISTA
+  List<String> l=new ArrayList<String>();
   //IP A QUE NOS VAMOS CONECT
   InetAddress serveAddress=InetAddress.getByName("localhost");
   //LIGACAO 
@@ -31,12 +34,15 @@ public class Identification {
    String ip_si = in.readLine();
   //LER A PORTA DO SI
    String porta_si = in.readLine();
-  System.out.println("[SERVER]-> HASH: "+resposta + " Ip do servidor: " + ip_si + " Porta do servidor: " + porta_si);
+   //ADICIONAR NA LISTA
+   l.add(resposta);
+   l.add(ip_si);
+   l.add(porta_si);
   //FECHAR LIGACAO
   ligacao.close();
 
-
-
+  return l;
+ 
   }
 
 
