@@ -20,11 +20,8 @@ import java.awt.event.*;
 public class SisIdenti implements ActionListener{
     //LABEL IMAGEM
     JLabel backb=new JLabel(new ImageIcon("C:/Users/pedro/Desktop/universidade/3 ano/Projects/fsd projects/FSD_Project/Client/src/views/assets/l.png"));
-=======
-public class SisIdenti implements ActionListener{
     //Inicializar janela principal  
     JFrame janela=new JFrame();
->>>>>>> 947a1826c720367afdea6808d5768b84f3aaa317
     //BOTAO
     JButton b=new JButton("CONFIRMAR");
     //TEXT FIELD USER
@@ -94,18 +91,6 @@ public class SisIdenti implements ActionListener{
         //TAMANHO DO TEXT FIELD CC
         t_cc.setBounds(130,150,210,30);
 
-        //LABEL IP
-        JLabel j_ip=new JLabel("INTRODUZA O SEU ENDERECO IP:");
-        //DEF DE TEXTO
-        j_ip.setFont(new Font("Italic",Font.BOLD,12));
-        //POSICAO E TAMANHO DO TEXTO
-        j_ip.setBounds(130,200,200,12);
-            
-        
-        //TAMANHO DO TEXT FIELD IP
-        t_ip.setBounds(130,215,210,30);
-
-
         //BOTÃO
         b.setBounds(165, 265, 140, 40);
         b.setBackground(lil);
@@ -145,8 +130,6 @@ public class SisIdenti implements ActionListener{
         janela.add(b);
         janela.add(j_cc);
         janela.add(t_cc);
-        janela.add(j_ip);
-        janela.add(t_ip);
         janela.add(j_user);
         janela.add(t_user);
         janela.add(j_hash);
