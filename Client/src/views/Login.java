@@ -16,7 +16,7 @@ import ops.ConVerify;;
 
 public class Login implements ActionListener{
 //LABEL IMAGEM
-JLabel backb=new JLabel(new ImageIcon("C:/Users/pedro/Desktop/universidade/3 ano/Projects/fsd projects/FSD_Project/Client/src/views/assets/l.png"));
+JLabel backb=new JLabel(new ImageIcon("./views/assets/l.png"));
   //TEXT FIELD
   JTextField textfieldip=new JTextField();
   //TEXT FIELD
@@ -30,7 +30,7 @@ JLabel backb=new JLabel(new ImageIcon("C:/Users/pedro/Desktop/universidade/3 ano
   public void construir(){
 
     //LOAD ICON
-    Image icon = Toolkit.getDefaultToolkit().getImage("C:/Users/pedro/Desktop/universidade/3 ano/Projects/fsd projects/FSD_Project/Client/src/views/assets/icon.PNG");
+    Image icon = Toolkit.getDefaultToolkit().getImage("./views/assets/icon.PNG");
     //SET IT
     janela.setIconImage(icon); 
     //TAMANHO DA JANELA

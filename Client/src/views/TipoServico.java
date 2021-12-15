@@ -23,7 +23,7 @@ JComboBox cb=new JComboBox(ops);
 //METODO QUE VAI CONSTRUIR A NOSSA JANELA
 public void construir(){
     //LOAD ICON
-    Image icon = Toolkit.getDefaultToolkit().getImage("C:/Users/pedro/Desktop/universidade/3 ano/Projects/fsd projects/FSD_Project/Client/src/views/assets/icon.PNG");
+    Image icon = Toolkit.getDefaultToolkit().getImage("./views/assets/icon.PNG");
     //SET IT
     janela.setIconImage(icon);
     Color lil = new Color(173,216,230);

@@ -15,6 +15,8 @@ import javax.swing.JFrame;
 public class TipoOperacao implements ActionListener{
   String ip,hash;
   int porta;
+    //LABEL IMAGEM
+    JLabel backb=new JLabel(new ImageIcon("./views/assets/l.png")); 
     //Inicializar janela principal  
     JFrame janela=new JFrame();
     //Buffer
@@ -35,7 +37,7 @@ public void construir(){
     //COLOR
     Color lil = new Color(173,216,230);
     //LOAD ICON
-    Image icon = Toolkit.getDefaultToolkit().getImage("C:/Users/pedro/Desktop/universidade/3 ano/Projects/fsd projects/FSD_Project/Client/src/views/assets/icon.PNG");
+    Image icon = Toolkit.getDefaultToolkit().getImage("./views/assets/icon.PNG");
     //SET IT
     janela.setIconImage(icon); 
     //BACKGROUND COLOR
@@ -70,6 +72,20 @@ public void construir(){
     b.setBackground(lil);
     b.addActionListener(this);
 
+    //FAZER O BOTAO CLICAVEL
+    backb.addMouseListener(new MouseAdapter() {
+      public void mouseClicked(MouseEvent me) {
+          //dispose da janela
+          janela.dispose();
+          //CRIAR NOVA JANELA
+          Login t=new Login();
+
+        }
+    });
+    //SELECIONAR POSI E TAMANHO
+    backb.setBounds(40, 15, 32, 32);
+    //SELECIONA
+
     //ADICIONAR LABEL AO PANEL
     panel.add(Titulo);
     //ADICIONAR ITENS NA JANELA
@@ -78,6 +94,7 @@ public void construir(){
     janela.add(op);
     janela.add(cb);
     janela.add(b);
+    janela.add(backb);
 
     janela.setLayout(null);
     janela.setVisible(true);

@@ -22,6 +22,8 @@ public class ListarServicos implements ActionListener{
     //INICIALIZAR PARAMETROS CONSTANTES
     String ip,hash;
     int porta;
+    //LABEL IMAGEM
+    JLabel backb=new JLabel(new ImageIcon("./views/assets/l.png"));
     //Inicializar janela principal  
     JFrame janela=new JFrame();
     //COMBOBOX TIPO DE CONEXAO
@@ -41,7 +43,7 @@ public class ListarServicos implements ActionListener{
     //METODO QUE VAI CONSTRUIR A NOSSA JANELA
     public void construir(){
         //LOAD ICON
-        Image icon = Toolkit.getDefaultToolkit().getImage("C:/Users/pedro/Desktop/universidade/3 ano/Projects/fsd projects/FSD_Project/Client/src/views/assets/icon.PNG");
+        Image icon = Toolkit.getDefaultToolkit().getImage("./views/assets/icon.PNG");
         //SET IT
         janela.setIconImage(icon);
         //COLOCAR NO CENTRO DA TELA
@@ -117,6 +119,19 @@ public class ListarServicos implements ActionListener{
         //SET POS
         a.setBounds(110,410,250,18);
 
+        //FAZER O BOTAO CLICAVEL
+        backb.addMouseListener(new MouseAdapter() {
+        public void mouseClicked(MouseEvent me) {
+            //dispose da janela
+            janela.dispose();
+            //CRIAR NOVA JANELA
+            TipoOperacao t=new TipoOperacao(ip,porta,hash);
+  
+          }
+        });
+        //SELECIONAR POSI E TAMANHO
+        backb.setBounds(40, 15, 32, 32);
+
         //ADICIONAR LABEL AO PANEL
         panel.add(Titulo);
         //ADICIONAR ITENS NA JANELA
@@ -128,6 +143,7 @@ public class ListarServicos implements ActionListener{
         janela.add(c_tipo);
         janela.add(panel_scroll);
         janela.add(a);
+        janela.add(backb);
 
         janela.setLayout(null);
         janela.setVisible(true);

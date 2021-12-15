@@ -9,7 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.*;
 public class CriarServicos implements ActionListener{
-
+    //LABEL IMAGEM
+    JLabel backb=new JLabel(new ImageIcon("./views/assets/l.png"));
     //TEXT FIELD
     JTextField textfieldservice=new JTextField();
     //TEXT FIELD
@@ -25,7 +26,7 @@ public class CriarServicos implements ActionListener{
         //FECHAR O PROGRAMA NO BOTÃO 'X'
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //LOAD ICON
-        Image icon = Toolkit.getDefaultToolkit().getImage("C:/Users/pedro/Desktop/universidade/3 ano/Projects/fsd projects/FSD_Project/Client/src/views/assets/icon.PNG");
+        Image icon = Toolkit.getDefaultToolkit().getImage("./views/assets/icon.PNG");
         //COLOR
         Color lil = new Color(173,216,230);
         //SET IT
@@ -80,6 +81,18 @@ public class CriarServicos implements ActionListener{
         //LER O BOTÃO
         b.addActionListener(this);
          
+        //FAZER O BOTAO CLICAVEL
+        backb.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent me) {
+                //dispose da janela
+                janela.dispose();
+                //CRIAR NOVA JANELA
+                TipoOperacao t=new TipoOperacao();
+      
+              }
+        });
+        //SELECIONAR POSI E TAMANHO
+        backb.setBounds(40, 15, 32, 32);
     
         //ADICIONAR LABEL AO PANEL
         panel.add(Titulo);
@@ -91,6 +104,7 @@ public class CriarServicos implements ActionListener{
         janela.add(labelip);
         janela.add(textfieldip);
         janela.add(b);
+        janela.add(backd);
     
         janela.setLayout(null);
         janela.setVisible(true);
