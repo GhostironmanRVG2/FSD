@@ -3,15 +3,19 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.*;
+import java.awt.event.*;
 
 public class Login implements ActionListener{
-
+//LABEL IMAGEM
+JLabel backb=new JLabel(new ImageIcon("C:/Users/pedro/Desktop/universidade/3 ano/Projects/fsd projects/FSD_Project/Client/src/views/assets/l.png"));
   //TEXT FIELD
   JTextField textfieldip=new JTextField();
   //TEXT FIELD
@@ -94,7 +98,20 @@ public class Login implements ActionListener{
     b.setBounds(165, 280, 140, 40);
     b.setBackground(lil);
     b.addActionListener(this);
-     
+    
+    //FAZER O BOTAO CLICAVEL
+    backb.addMouseListener(new MouseAdapter() {
+      public void mouseClicked(MouseEvent me) {
+          //dispose da janela
+          janela.dispose();
+          //CRIAR NOVA JANELA
+          TipoServico t=new TipoServico();
+
+        }
+    });
+    //SELECIONAR POSI E TAMANHO
+    backb.setBounds(40, 15, 32, 32);
+    //SELECIONA
 
     //ADICIONAR LABEL AO PANEL
     panel.add(Titulo);
@@ -108,6 +125,7 @@ public class Login implements ActionListener{
     janela.add(labelHASH);
     janela.add(textfieldHASH);
     janela.add(b);
+    janela.add(backb);
 
     janela.setLayout(null);
     janela.setVisible(true);

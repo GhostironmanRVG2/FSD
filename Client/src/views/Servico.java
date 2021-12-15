@@ -11,9 +11,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
+import javax.swing.*;
+import java.awt.event.*;
 public class Servico implements ActionListener{
-
+//LABEL IMAGEM
+JLabel backb=new JLabel(new ImageIcon("C:/Users/pedro/Desktop/universidade/3 ano/Projects/fsd projects/FSD_Project/Client/src/views/assets/l.png"));
         //TEXT FIELD USER
         JTextField t_ip=new JTextField();
         //TEXT FIELD CC
@@ -108,6 +110,18 @@ public class Servico implements ActionListener{
         //TAMANHO
         t_resp.setBounds(130, 360, 210, 30);
 
+         //FAZER O BOTAO CLICAVEL
+         backb.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent me) {
+                //dispose da janela
+                janela.dispose();
+                //CRIAR NOVA JANELA
+                TipoServico t=new TipoServico();
+
+              }
+          });
+          //SELECIONAR POSI E TAMANHO
+          backb.setBounds(40, 15, 32, 32);
         //ADICIONAR LABEL AO PANEL
         panel.add(Titulo);
         //ADICIONAR ITENS NA JANELA
@@ -122,7 +136,7 @@ public class Servico implements ActionListener{
         janela.add(t_resp); 
         janela.add(j_tipo);
         janela.add(c_tipo);
-
+        janela.add(backb);
         janela.setLayout(null);
         janela.setVisible(true);
 
