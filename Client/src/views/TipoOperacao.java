@@ -20,7 +20,7 @@ public class TipoOperacao implements ActionListener{
     //Inicializar janela principal  
     JFrame janela=new JFrame();
     //Buffer
-    String ops[]={"Consultar","Criar"}; 
+    String ops[]={"Consultar"}; 
     //COMBO BOX
     JComboBox cb=new JComboBox(ops);
 

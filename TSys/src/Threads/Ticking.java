@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.time.LocalDateTime;
-
-import javax.sound.sampled.SourceDataLine;
 
 import Lists.*;
 public class Ticking {
@@ -89,12 +86,34 @@ public class Ticking {
     //LER TIPO DE SERVICO
     String tipo_servico=in.readLine();
     //CRIAR SERVICO E ADICIONA-LO AO VETOR
-    sv.addService(new Service(designacao_Servico,ip_Servico,tipo_servico));
+    sv.addService(new Service(designacao_Servico,ip_Servico,tipo_servico,hash));
     System.out.println("Criacao");
     out.println("Servico criado");
+    }else if(etapa.equals("3")&&hash.equals("GOAL")){
+    //LER DESIGNACAO
+    String designacao=in.readLine();
+    //IR BUSCAR O SIZE
+    int lenght=sv.getVect().size();
+    int index=-1;
+    //ITERAR O VECTOR  
+    for(int i=0;i<lenght;i++){
+    //VERIFICAR SE O IP É IGUAL OU NAO ,SE FOR PARA A ITERACAO COM O BREAK
+    if(sv.getVect().get(i).getDesignacao().equals(designacao)){
+      index=i;
+      break;
     }
-
-
+    }
+    String ip;
+    //FAZER UM IF CONSOANTE A RESPOSTA
+    if(index!=-1){
+    //IR BUSCAR IP
+    ip=sv.getVect().get(index).getIp();  
+    }else{
+    //NON IP 
+    ip="NOPE";  
+    }
+    //ENVIAR RESPETIVO IP
+    out.println(ip);
       
     }
     //ENCHER BUFFER OUT
@@ -107,8 +126,7 @@ public class Ticking {
     ligacao.close();
    
     }
- 
 
-
+  }
 
 }

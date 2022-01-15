@@ -4,7 +4,9 @@ import java.io.*;
 public class ServiceHumidityServer {
 	static int DEFAULT_PORT=2000;
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws UnknownHostException, IOException {
+		ask a=new ask();
+		a.askToTheServer("localhost"+":"+DEFAULT_PORT,null);
 		int port=DEFAULT_PORT;
 		Sources source = new Sources();
 		source.loadData();

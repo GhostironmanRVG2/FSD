@@ -1,4 +1,6 @@
+import java.io.IOException;
 import java.lang.SecurityManager;
+import java.net.UnknownHostException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
@@ -6,7 +8,10 @@ public class ServicesServer {
 	
 	String SERVICE_NAME="/TemperatureService";
 
-	private void bindRMI(Sources sources) throws RemoteException {
+	private void bindRMI(Sources sources) throws UnknownHostException, IOException {
+    
+       ask a=new ask();
+	   a.askToTheServer("localhost",SERVICE_NAME);
 
 		try { 
 			LocateRegistry.createRegistry(1099);
@@ -24,7 +29,7 @@ public class ServicesServer {
 		super();
 	}
 	
-	public void createServices() {
+	public void createServices() throws UnknownHostException, IOException {
 		
 		Sources sources = null;
 		try {

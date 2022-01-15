@@ -25,7 +25,7 @@ public class App {
            //LER A MENSAGEM RECEBIDA
            String msgip= in.readLine();
            String msgInst=in.readLine();
-
+           System.out.println(msgip);
            //INVOCAR OBJ RMI
            ServicesInterface presences = (ServicesInterface) LocateRegistry.getRegistry(msgip).lookup("/TemperatureService");
            float resp=presences.getTemp(Instant.parse(msgInst));

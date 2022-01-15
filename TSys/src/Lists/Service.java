@@ -1,12 +1,13 @@
 package Lists;
 public class Service {
-    String designacao,ip,tipo_servico;
+    String designacao,ip,tipo_servico,chave;
     int id_servico;
     //CRIAR OBJETO DO TIPO SERVICO
-    public Service(String designacao,String ip,String tipo_servico){
+    public Service(String designacao,String ip,String tipo_servico,String chave){
         this.designacao=designacao;
         this.ip=ip;
         this.tipo_servico=tipo_servico;
+        this.chave=chave;
     }
     //GETS
     public String getDesignacao() {
@@ -21,6 +22,9 @@ public class Service {
    public int getId_servico() {
        return id_servico;
    }
+   public String getChave() {
+       return chave;
+   }
 
     //SETTERS
     public void setDesignacao(String designacao) {
@@ -34,6 +38,9 @@ public class Service {
     }
     public void setId_servico(int id_servico) {
         this.id_servico = id_servico;
+    }
+    public void setChave(String chave) {
+        this.chave = chave;
     }
 
 }

@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.time.Instant;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import views.*;
 import ops.ServiceSocket;
+import ops.Three;
 import ops.Midle;
 
 import javax.swing.*;
@@ -73,7 +75,7 @@ JLabel backb=new JLabel(new ImageIcon("./views/assets/l.png"));
         borda.setBounds(190,40,80,1);
 
         //Texto op USER
-        JLabel j_ip=new JLabel("INTRODUZA O IP DO SERVICO:");
+        JLabel j_ip=new JLabel("INTRODUZA O NOME DO SERVICO:");
         //DEF DE TEXTO
         j_ip.setFont(new Font("Italic",Font.BOLD,12));
         //POSICAO E TAMANHO DO TEXTO
@@ -163,13 +165,31 @@ JLabel backb=new JLabel(new ImageIcon("./views/assets/l.png"));
             String times=t_ts.getText();
             //type of service
             if(tipoconex.equals("RMI")){
+                Three t=new Three("GOAL",ip_porta);
+                String ip_TICKET=null;
+                try {
+                    ip_TICKET = t.go();
+                } catch (UnknownHostException e2) {
+                    // TODO Auto-generated catch block
+                    e2.printStackTrace();
+                } catch (IOException e2) {
+                    // TODO Auto-generated catch block
+                    e2.printStackTrace();
+                }
                 //RMI
                 int porta=-1;
                 try {
                     //IR BUSCAR A PORTA
-                    Integer.valueOf(ip_porta.substring(ip_porta.lastIndexOf(":")));
+                    Integer.valueOf(ip_TICKET.substring(ip_TICKET.lastIndexOf(":")));
                     JOptionPane.showMessageDialog(null, "RMI NAO LEVA PORTA!");
                 } catch (Exception exeptionporta) {porta=0;}
+
+                if(ip_TICKET.equals("NOPE")){
+                    JOptionPane.showMessageDialog(null, "NAO EXISTE QUALQUER SERVICO COM ESSE NOME");
+                    porta=-1;
+                }
+
+
                 //SE NAO TIVER PORTA ENTAO..
                 if(porta==0){
                 
@@ -187,7 +207,7 @@ JLabel backb=new JLabel(new ImageIcon("./views/assets/l.png"));
                 //SE A TIMESTAMP FOR VALIDA
                 if(isitatime==1){
                 //INVOCAR OBJETO
-                Midle m=new Midle("localhost",times,ip_porta);
+                Midle m=new Midle("localhost",times,ip_TICKET);
                 String resp=null;
                 try {
                     resp = m.go();
@@ -201,15 +221,39 @@ JLabel backb=new JLabel(new ImageIcon("./views/assets/l.png"));
 
 
             }else{
+            
+
+                Three t=new Three("GOAL",ip_porta);
+                String ip_TICKET=null;
+                try {
+                    ip_TICKET = t.go();
+                } catch (UnknownHostException e2) {
+                    // TODO Auto-generated catch block
+                    e2.printStackTrace();
+                } catch (IOException e2) {
+                    // TODO Auto-generated catch block
+                    e2.printStackTrace();
+                }
+
+
             //SOCKET
             int porta_dois=-1;
+            int nullable=0;
             //IR BUSCAR A PORTA
+            if(ip_TICKET.equals("NOPE")){
+                    JOptionPane.showMessageDialog(null, "NAO EXISTE QUALQUER SERVICO COM ESSE NOME");
+                    nullable=-1;
+                }
+            if(nullable==0){
             try {
                 //IR BUSCAR A PORTA
-                porta_dois=Integer.valueOf(ip_porta.substring(ip_porta.lastIndexOf(":")+1));
+                porta_dois=Integer.valueOf(ip_TICKET.substring(ip_TICKET.lastIndexOf(":")+1));
             } catch (Exception exeptionporta) {
                 JOptionPane.showMessageDialog(null, "SOCKET TEM QUE TER UMA PORTA!");
             }
+        }
+            
+
             //CASO A PORTA SEJA DIFERENTE DE -1
             if(porta_dois!=-1){
                 //VERIRICAR A TIMESTAMP
@@ -225,7 +269,7 @@ JLabel backb=new JLabel(new ImageIcon("./views/assets/l.png"));
                 //SE A TIMESTAMP FOR VALIDA
                 if(isitatime==1){
                     // FAZER A CONEXAO PARA O SOCKET
-                    ServiceSocket S = new ServiceSocket(ip_porta.substring(0, ip_porta.lastIndexOf(":")), porta_dois, timestamp_servico);
+                    ServiceSocket S = new ServiceSocket(ip_TICKET.substring(0, ip_TICKET.lastIndexOf(":")), porta_dois, timestamp_servico);
                     try {
                         //REPOSTA
                         List resp=S.go();
