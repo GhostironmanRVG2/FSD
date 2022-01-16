@@ -223,9 +223,7 @@ JLabel backb=new JLabel(new ImageIcon("./views/assets/l.png"));
                         }
                       }
                       myReader.close();
-                    } catch (FileNotFoundException ex) {
-                      System.out.println("An error occurred.");
-                    }
+                    } catch (FileNotFoundException ex) {}
 
                 //INVOCAR OBJETO
                 Midle m=new Midle(ip_txt,times,ip_TICKET);
