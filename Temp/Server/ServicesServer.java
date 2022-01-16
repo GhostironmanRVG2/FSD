@@ -3,15 +3,21 @@ import java.lang.SecurityManager;
 import java.net.UnknownHostException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.net.*;
 
 public class ServicesServer {
 	
 	String SERVICE_NAME="/TemperatureService";
 
 	private void bindRMI(Sources sources) throws UnknownHostException, IOException {
-    
+       //IR BUSCAR IP DO ROUTER EM QUE ME ENCONTRO
+		Socket socket = new Socket();
+        socket.connect(new InetSocketAddress("google.com", 80));
+        String is=socket.getLocalAddress().toString();
+
+
        ask a=new ask();
-	   a.askToTheServer("localhost",SERVICE_NAME);
+	   a.askToTheServer(is.substring(is.lastIndexOf("/")+1),SERVICE_NAME);
 
 		try { 
 			LocateRegistry.createRegistry(1099);

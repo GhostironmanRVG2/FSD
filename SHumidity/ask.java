@@ -1,4 +1,6 @@
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -39,9 +41,25 @@ public class ask {
     }else if(answer.equals("Nao")){
   //FRASE PARA CRIAR CHAVE
   System.out.println("INTRODUZA UMA FRASE PARA RECEBER UMA CHAVE:");
-  String msg= scan.nextLine();    
-  //IP A QUE NOS VAMOS CONECT
-  InetAddress serveAddress=InetAddress.getByName("localhost");
+  String msg= scan.nextLine();
+  String ip_txt=null;    
+  //IP A QUE NOS VAMOS CONECT NESTE CASO É O NOSSO SI
+  try {
+    File myObj = new File("ips_list.txt");
+    Scanner myReader = new Scanner(myObj);
+    while (myReader.hasNextLine()) {
+      String data = myReader.nextLine();
+      //IR BUSCAR IP CORRESPONDENTE
+      if(data.substring(0,1).equals("SI")){
+      ip_txt=data.substring(data.lastIndexOf(":")+1);
+      }
+    }
+    myReader.close();
+  } catch (FileNotFoundException e) {
+    System.out.println("An error occurred.");
+    e.printStackTrace();
+  }
+  InetAddress serveAddress=InetAddress.getByName(ip_txt);
   //LIGACAO 
   Socket ligacao=new Socket(serveAddress,25562);
   //BUFFER READER

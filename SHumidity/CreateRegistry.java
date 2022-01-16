@@ -1,9 +1,12 @@
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Scanner;
 
 public class CreateRegistry {
 //ITENS
@@ -19,8 +22,25 @@ this.designacao=designacao;
 
 //METODO PARA SIMPLESMENTE REGISTAR
 void register() throws UnknownHostException, IOException{
+    String ip_txt=null;    
+  //IP A QUE NOS VAMOS CONECT NESTE CASO É O NOSSO SI
+  try {
+    File myObj = new File("ips_list.txt");
+    Scanner myReader = new Scanner(myObj);
+    while (myReader.hasNextLine()) {
+      String data = myReader.nextLine();
+      //IR BUSCAR IP CORRESPONDENTE
+      if(data.substring(0,1).equals("ST")){
+      ip_txt=data.substring(data.lastIndexOf(":")+1);
+      }
+    }
+    myReader.close();
+  } catch (FileNotFoundException e) {
+    System.out.println("An error occurred.");
+    e.printStackTrace();
+  }
     //CRIAR A SOCKET QUE VAI LIGAR
-    Socket ligacao=new Socket("localhost",25563);
+    Socket ligacao=new Socket(ip_txt,25563);
     //BUFFER READER
     BufferedReader in=new BufferedReader(new InputStreamReader(ligacao.getInputStream()));
     //PrintWriter
