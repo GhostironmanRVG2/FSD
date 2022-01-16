@@ -7,6 +7,11 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.UnknownHostException;
+import java.util.Scanner;
 public class Identification {
     String msg;
   public Identification(String msg){this.msg=msg;}
@@ -14,10 +19,25 @@ public class Identification {
   public List go()throws IOException{
   //CRIAR LISTA
   List<String> l=new ArrayList<String>();
-  //IP A QUE NOS VAMOS CONECT
-  InetAddress serveAddress=InetAddress.getByName("localhost");
+  String ip_txt=null;    
+  //IP A QUE NOS VAMOS CONECT NESTE CASO É O NOSSO SI
+  try {
+    File myObj = new File("ips_list.txt");
+    Scanner myReader = new Scanner(myObj);
+    while (myReader.hasNextLine()) {
+      String data = myReader.nextLine();
+      //IR BUSCAR IP CORRESPONDENTE
+      if(data.substring(0,2).equals("SI")){
+      ip_txt=data.substring(data.lastIndexOf(":")+1);
+      }
+    }
+    myReader.close();
+  } catch (FileNotFoundException e) {
+    System.out.println("An error occurred.");
+    e.printStackTrace();
+  }
   //LIGACAO 
-  Socket ligacao=new Socket(serveAddress,25562);
+  Socket ligacao=new Socket(ip_txt,25562);
   //BUFFER READER
   BufferedReader in=new BufferedReader(new InputStreamReader(ligacao.getInputStream()));
   //PrintWriter

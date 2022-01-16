@@ -30,7 +30,7 @@ void register() throws UnknownHostException, IOException{
     while (myReader.hasNextLine()) {
       String data = myReader.nextLine();
       //IR BUSCAR IP CORRESPONDENTE
-      if(data.substring(0,1).equals("ST")){
+      if(data.substring(0,2).equals("ST")){
       ip_txt=data.substring(data.lastIndexOf(":")+1);
       }
     }

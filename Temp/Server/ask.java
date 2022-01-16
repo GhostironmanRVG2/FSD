@@ -50,7 +50,7 @@ public class ask {
     while (myReader.hasNextLine()) {
       String data = myReader.nextLine();
       //IR BUSCAR IP CORRESPONDENTE
-      if(data.substring(0,1).equals("SI")){
+      if(data.substring(0,2).equals("SI")){
       ip_txt=data.substring(data.lastIndexOf(":")+1);
       }
     }

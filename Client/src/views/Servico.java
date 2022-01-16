@@ -218,8 +218,9 @@ JLabel backb=new JLabel(new ImageIcon("./views/assets/l.png"));
                       while (myReader.hasNextLine()) {
                         String data = myReader.nextLine();
                         //IR BUSCAR IP CORRESPONDENTE
-                        if(data.substring(0,1).equals("MD")){
+                        if(data.substring(0,2).equals("MD")){
                         ip_txt=data.substring(data.lastIndexOf(":")+1);
+                        System.out.println(ip_txt);
                         }
                       }
                       myReader.close();

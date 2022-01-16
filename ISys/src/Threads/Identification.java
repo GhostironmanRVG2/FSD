@@ -1,14 +1,14 @@
 package Threads;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import Hash.PasswordUtils;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
+
+import Hash.PasswordUtils;
 
 public class Identification {
   Socket ligacao;
@@ -45,22 +45,21 @@ public class Identification {
    String ip_txt=null;    
   //IP A QUE NOS VAMOS CONECT NESTE CASO É O NOSSO SI
   try {
-    File myObj = new File("ips_list.txt");
+    File myObj = new File("ip.txt");
     Scanner myReader = new Scanner(myObj);
     while (myReader.hasNextLine()) {
       String data = myReader.nextLine();
       //IR BUSCAR IP CORRESPONDENTE
-      if(data.substring(0,1).equals("ST")){
+      if(data.substring(0,2).equals("ST")){
       ip_txt=data.substring(data.lastIndexOf(":")+1);
+      System.out.println(ip_txt);
       }
     }
     myReader.close();
-  } catch (FileNotFoundException e) {
-    System.out.println("An error occurred.");
-    e.printStackTrace();
-  }
+  } catch (FileNotFoundException e) {}
    //FAZER LIGACAO AO SERVER DE TICKING E ENVIAR A HASH
    //LIGACAO
+   System.out.println(ip_txt);
    Socket l=new Socket(ip_txt,25563); 
    //BUFFER READER
    BufferedReader entrada=new BufferedReader(new InputStreamReader(l.getInputStream()));
@@ -76,7 +75,7 @@ public class Identification {
    saida.flush();
    //FECHAR A LIGACAO COM O ST
    l.close();
-
+   System.out.println(ip_txt);
    //RECEBER A HASH
    out.println(resposta);
    //ENVIAR IP
