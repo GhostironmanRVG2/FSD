@@ -21,6 +21,10 @@ import ops.Midle;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.io.InputStreamReader;
 public class Servico implements ActionListener{
 //LABEL IMAGEM
 JLabel backb=new JLabel(new ImageIcon("./views/assets/l.png"));
@@ -206,8 +210,25 @@ JLabel backb=new JLabel(new ImageIcon("./views/assets/l.png"));
 
                 //SE A TIMESTAMP FOR VALIDA
                 if(isitatime==1){
+                    String ip_txt=null;    
+                    //IP A QUE NOS VAMOS CONECT NESTE CASO É O NOSSO SI
+                    try {
+                      File myObj = new File("ips_list.txt");
+                      Scanner myReader = new Scanner(myObj);
+                      while (myReader.hasNextLine()) {
+                        String data = myReader.nextLine();
+                        //IR BUSCAR IP CORRESPONDENTE
+                        if(data.substring(0,1).equals("MD")){
+                        ip_txt=data.substring(data.lastIndexOf(":")+1);
+                        }
+                      }
+                      myReader.close();
+                    } catch (FileNotFoundException ex) {
+                      System.out.println("An error occurred.");
+                    }
+
                 //INVOCAR OBJETO
-                Midle m=new Midle("localhost",times,ip_TICKET);
+                Midle m=new Midle(ip_txt,times,ip_TICKET);
                 String resp=null;
                 try {
                     resp = m.go();

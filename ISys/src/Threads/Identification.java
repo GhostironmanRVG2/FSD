@@ -80,7 +80,7 @@ public class Identification {
    //RECEBER A HASH
    out.println(resposta);
    //ENVIAR IP
-   out.println("localhost");
+   out.println(ip_txt);
    //ENVIAR porta
    out.println("25563");
    //ENCHER O BUFFER
